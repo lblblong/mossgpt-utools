@@ -1,0 +1,30 @@
+.index {
+  background: #f1f1f1;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    cursor: pointer;
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+
+  textarea {
+    width: 100%;
+    height: 360px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  .actions {
+    margin-top: 12px;
+  }
+}
+

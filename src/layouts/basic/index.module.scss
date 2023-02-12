@@ -1,0 +1,38 @@
+.index {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+
+  .navbar {
+    height: 100%;
+    border-right: 1px solid rgba($color: #000000, $alpha: 0.06);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .menu {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 20px;
+      &:hover {
+        background: rgba($color: #000000, $alpha: 0.06);
+      }
+    }
+
+    .active,
+    .menu:hover {
+      color: var(--color-primary);
+    }
+  }
+
+  .main {
+    flex: 1;
+    overflow: hidden;
+  }
+}
+

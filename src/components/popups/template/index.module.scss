@@ -1,0 +1,36 @@
+.index {
+  background: #fff;
+  border-radius: 12px;
+  width: 400px;
+  height: 400px;
+  .edit,
+  .templates {
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+  }
+
+  .edit {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    textarea {
+      width: 100%;
+      flex: 1;
+    }
+    .actions {
+      margin-top: 8px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+  }
+
+  .templates {
+    overflow-y: auto;
+    .item + .item {
+      margin-top: 12px;
+    }
+  }
+}
+

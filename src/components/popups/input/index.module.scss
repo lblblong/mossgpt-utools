@@ -1,0 +1,25 @@
+.index {
+  padding: 16px;
+  background: #fff;
+  border-radius: 12px;
+  min-width: 200px;
+  > * + * {
+    margin-top: 12px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    > * {
+      flex: 1;
+    }
+    .submit {
+      margin-left: 12px;
+    }
+  }
+}
+

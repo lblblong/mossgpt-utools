@@ -1,0 +1,31 @@
+{
+  "main": "./index.html",
+  "preload": "./preload.js",
+  "logo": "./logo.png",
+  "pluginName": "MossGPT",
+  "description": "强如 Moss 的对话 AI",
+  "author": "lblblong",
+  "homepage": "https://github.com/lblblong",
+  "version": "0.0.2",
+  "platform": ["win32", "darwin"],
+  "features": [
+    {
+      "code": "moss",
+      "explain": "这是 Moss 的回答",
+      "cmds": ["Moss", "MossGPT", "ChatGPT", "Chat"]
+    },
+    {
+      "code": "text",
+      "explain": "问问 Moss",
+      "cmds": [
+        {
+          "type": "over",
+          "label": "问问 Moss",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      ]
+    }
+  ]
+}
+

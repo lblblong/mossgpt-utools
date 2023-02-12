@@ -1,0 +1,51 @@
+{
+  "name": "mossgpt",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite build -w",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "@keyv/sqlite": "^3.6.4",
+    "@libeilong/react-store-provider": "^0.2.3",
+    "antd": "^5.2.0",
+    "asar": "^3.2.0",
+    "chatgpt": "^4.2.0",
+    "clsx": "^1.2.1",
+    "dayjs": "^1.11.6",
+    "keyv": "^4.5.2",
+    "mitt": "^3.0.0",
+    "mobx": "^6.6.2",
+    "mobx-react-lite": "^3.4.0",
+    "oh-popup": "^0.1.0",
+    "oh-popup-react": "^0.1.2",
+    "oh-router": "^0.3.0",
+    "oh-router-react": "^0.0.9",
+    "qrcode.react": "^3.1.0",
+    "qs": "^6.11.0",
+    "react": "^18.2.0",
+    "react-contexify": "^6.0.0",
+    "react-dom": "^18.2.0",
+    "react-markdown": "^8.0.5",
+    "react-syntax-highlighter": "^15.5.0",
+    "uuid": "^9.0.0",
+    "wechaty": "^1.20.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.8.5",
+    "@types/qs": "^6.9.7",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@types/react-syntax-highlighter": "^15.5.6",
+    "@types/uuid": "^9.0.0",
+    "@vitejs/plugin-react": "^3.1.0",
+    "sass": "^1.55.0",
+    "typescript": "^4.6.4",
+    "utools-api-types": "^3.0.0",
+    "vite": "^4.1.1",
+    "vite-plugin-utools": "^0.4.1"
+  }
+}

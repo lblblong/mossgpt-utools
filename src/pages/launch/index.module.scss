@@ -1,0 +1,32 @@
+.index {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    .logo {
+      width: 240px;
+    }
+    .form {
+      width: 360px;
+      margin-top: 24px;
+      > * {
+        width: 100%;
+        margin-bottom: 8px;
+      }
+    }
+  }
+  .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+  }
+}
+

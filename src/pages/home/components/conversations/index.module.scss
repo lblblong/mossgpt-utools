@@ -1,0 +1,32 @@
+.index {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  .item {
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    min-height: 50px;
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  
+  .active,
+  .item:hover {
+    background: rgba($color: #000000, $alpha: 0.03);
+  }
+
+  .list {
+    flex: 1;
+    overflow-y: auto;
+  }
+}
+
