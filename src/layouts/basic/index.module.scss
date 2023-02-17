@@ -3,10 +3,11 @@
   height: 100vh;
   width: 100%;
   overflow: hidden;
+  background: #fff;
 
   .navbar {
     height: 100%;
-    border-right: 1px solid rgba($color: #000000, $alpha: 0.06);
+    border-right: 1px solid var(--gray-0);
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -19,9 +20,7 @@
       align-items: center;
       cursor: pointer;
       font-size: 20px;
-      &:hover {
-        background: rgba($color: #000000, $alpha: 0.06);
-      }
+      color: var(--gray-9);
     }
 
     .active,
@@ -34,5 +33,9 @@
     flex: 1;
     overflow: hidden;
   }
+}
+
+.dark {
+  background: rgba($color: #000000, $alpha: 0.95);
 }
 

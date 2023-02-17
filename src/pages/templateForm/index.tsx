@@ -8,6 +8,8 @@ import { useQuery } from '../../shared/hooks/useQuery'
 import styles from './index.module.scss'
 import { IQuery } from './route'
 import { Store } from './store'
+import clsx from 'clsx'
+import { appStore } from '../../stores/app'
 
 function _Page() {
   const store = useStore<Store>()
@@ -17,7 +19,7 @@ function _Page() {
   }, [query, store])
 
   return withObserver(() => (
-    <div className={styles.index}>
+    <div className={clsx(styles.index, appStore.isDark && styles.dark)}>
       <h2 className={styles.title} onClick={() => router.back()}>
         <ArrowLeftOutlined /> 返回
       </h2>

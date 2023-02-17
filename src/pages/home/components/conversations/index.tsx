@@ -7,6 +7,7 @@ import { withObserver } from '../../../../shared/func/withObserver'
 import { chatStore } from '../../../../stores/chat'
 import { homeStore } from '../../store'
 import styles from './index.module.scss'
+import { appStore } from '../../../../stores/app'
 
 export const Conversations = () => {
   const conversationRef = useRef<Conversation>()
@@ -14,34 +15,32 @@ export const Conversations = () => {
     id: 'conversationMenu',
   })
 
-  return (
+  return withObserver(() => (
     <div className={styles.index}>
       <div className={styles.item} onClick={homeStore.createConversation}>
         + 新建会话
       </div>
-      {withObserver(() => (
-        <div className={styles.list}>
-          {chatStore.conversations.map((it) => {
-            return (
-              <div
-                className={clsx(
-                  styles.item,
-                  it === homeStore.conversation && styles.active
-                )}
-                onClick={() => homeStore.setConversation(it)}
-                onContextMenu={(event) => {
-                  conversationRef.current = it
-                  show({ event })
-                }}
-              >
-                <span>{it.name}</span>
-              </div>
-            )
-          })}
-        </div>
-      ))}
+      <div className={styles.list}>
+        {chatStore.conversations.map((it) => {
+          return (
+            <div
+              className={clsx(
+                styles.item,
+                it === homeStore.conversation && styles.active
+              )}
+              onClick={() => homeStore.setConversation(it)}
+              onContextMenu={(event) => {
+                conversationRef.current = it
+                show({ event })
+              }}
+            >
+              <span>{it.name}</span>
+            </div>
+          )
+        })}
+      </div>
 
-      <Menu id="conversationMenu">
+      <Menu id="conversationMenu" theme={appStore.isDark ? 'dark' : 'light'}>
         <Item
           onClick={() => homeStore.removeConversation(conversationRef.current)}
         >
@@ -55,20 +54,7 @@ export const Conversations = () => {
           修改会话名称
         </Item>
       </Menu>
-
-      {/* <div className={styles.action}>
-        <div>
-          <Button type="primary" onClick={store.createConversation}>
-            新建会话
-          </Button>
-        </div>
-        <div>
-          <Button type="primary" onClick={chatStore.destory}>
-            清除
-          </Button>
-        </div>
-      </div> */}
     </div>
-  )
+  ))
 }
 

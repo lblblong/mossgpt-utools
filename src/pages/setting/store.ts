@@ -37,6 +37,7 @@ export class Store {
   saveBaseConfig = () => {
     Storage.setConfig({
       model: this.baseConfig.model,
+      prompt: this.baseConfig.prompt,
     })
     Storage.setApiKey(this.baseConfig.apiKey)
     chatgptStore.reinit()

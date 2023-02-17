@@ -6,6 +6,8 @@ import { settingRoute, toSetting } from '../../pages/setting/route'
 import { templateRoute } from '../../pages/template/route'
 import { templateFormRoute } from '../../pages/templateForm/route'
 import { router } from '../../router'
+import { withObserver } from '../../shared/func/withObserver'
+import { appStore } from '../../stores/app'
 import styles from './index.module.scss'
 
 export const BasicLayout = () => {
@@ -42,8 +44,8 @@ export const BasicLayout = () => {
     },
   ]
 
-  return (
-    <div className={styles.index}>
+  return withObserver(() => (
+    <div className={clsx(styles.index, appStore.isDark && styles.dark)}>
       <div className={styles.navbar}>
         <div>
           {menus.map((menu) => (
@@ -69,6 +71,6 @@ export const BasicLayout = () => {
         <Outlet />
       </div>
     </div>
-  )
+  ))
 }
 

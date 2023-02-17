@@ -1,5 +1,5 @@
 import { message } from 'antd'
-import { makeAutoObservable, toJS } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import { Storage } from '../shared/storage'
 import { chatgptStore } from '../stores/chatgpt'
 import { Message } from './message'
@@ -38,6 +38,7 @@ export class Conversation {
 
   sendMessage = async (text: string) => {
     try {
+      const { prompt } = Storage.getConfig()
       if (this.messages.length === 0 && this.name === '新会话') {
         chatgptStore.getTitle(text).then((title) => {
           this.name = title
@@ -63,7 +64,7 @@ export class Conversation {
         conversationId: lastMessage?.conversationId,
         parentMessageId: lastMessage?.id,
         messageId: message.id,
-        promptPrefix: '你好',
+        promptPrefix: prompt,
         onProgress: ({ id, text }) => {
           if (!chatgptMessage) {
             chatgptMessage = new Message({

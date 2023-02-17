@@ -1,3 +1,4 @@
+import { ConfigProvider, theme } from 'antd'
 import { configure } from 'mobx'
 import { ManagerProvider } from 'oh-popup-react'
 import 'oh-popup-react/dist/style.css'
@@ -7,13 +8,26 @@ import './assets/css/index.scss'
 import './assets/css/var.css'
 import { router } from './router'
 import { popupManager } from './shared/popupManager'
+import { appStore } from './stores/app'
+import { Observer } from 'mobx-react-lite'
 
 configure({ enforceActions: 'never' })
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <>
-    <ManagerProvider manager={popupManager} />
-    <RouterView router={router} />
-  </>
+  <Observer>
+    {() => (
+      <ConfigProvider
+        theme={{
+          algorithm:
+            appStore.theme === 'dark'
+              ? theme.darkAlgorithm
+              : theme.defaultAlgorithm,
+        }}
+      >
+        <ManagerProvider manager={popupManager} />
+        <RouterView router={router} />
+      </ConfigProvider>
+    )}
+  </Observer>
 )
 

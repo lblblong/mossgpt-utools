@@ -1,5 +1,5 @@
 .index {
-  background: #f1f1f1;
+  background: var(--base-color);
   height: 100%;
   width: 100%;
   overflow-x: hidden;
@@ -11,7 +11,7 @@
     font-size: 16px;
     padding-bottom: 12px;
     margin-bottom: 12px;
-    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.06);
+    border-bottom: 1px solid var(--gray-0);
   }
 }
 

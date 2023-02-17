@@ -2,6 +2,7 @@ export const Models = ['text-davinci-003', 'text-davinci-002', 'davinci']
 
 export const DefaultConfig = {
   model: Models[0],
+  prompt: '你是Moss，一个由 550W 驱动的 AI，请尽可能的回答我的任何问题。',
 }
 
 export const DefaultTemplates = [

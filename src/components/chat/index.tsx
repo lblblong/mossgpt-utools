@@ -7,6 +7,8 @@ import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus as theme } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import styles from './index.module.scss'
+import { appStore } from '../../stores/app'
+import { withObserver } from '../../shared/func/withObserver'
 
 interface ChatProps {
   messages: {
@@ -34,8 +36,11 @@ export const Chat: FC<ChatProps> = (props) => {
     firstRef.current = false
   }, [messages])
 
-  return (
-    <div id="chat-wrap" className={styles.index}>
+  return withObserver(() => (
+    <div
+      id="chat-wrap"
+      className={clsx(styles.index, appStore.isDark && styles.dark)}
+    >
       {messages.map((message) => {
         return (
           <div
@@ -82,9 +87,7 @@ export const Chat: FC<ChatProps> = (props) => {
             </div>
             <div className={styles.time}>
               <Space>
-                <span>
-                  {dayjs(message.createdAt).format('MM-DD HH:mm')}
-                </span>
+                <span>{dayjs(message.createdAt).format('MM-DD HH:mm')}</span>
                 <span>
                   {
                     {
@@ -106,6 +109,6 @@ export const Chat: FC<ChatProps> = (props) => {
       })}
       <div id="last-message"></div>
     </div>
-  )
+  ))
 }
 

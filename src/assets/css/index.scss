@@ -6,11 +6,14 @@ textarea {
   border: none;
   outline: none;
   font-size: 14px;
+  background: transparent;
+  color: var(--gray-8);
 }
 
 body,
 html {
   padding: 0;
   margin: 0;
+  color: var(--gray-8);
 }
 

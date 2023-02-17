@@ -27,7 +27,6 @@ export const chatgptStore = new (class {
       },
       upsertMessage: async (message) => {
         if (message.conversationId === 'title') return
-        console.log('持久化消息', message)
         Storage.setMessage(Message.forChatMessage(message))
         globalEvent.emit('persistedMessage', message.id)
       },
@@ -45,8 +44,7 @@ export const chatgptStore = new (class {
   }
 
   getTitle = async (content: string) => {
-    this.init()
-    const res = await this.client?.sendMessage(
+    const res = await this.sendMessage(
       `请为这段文字起个12个字以内的中文标题，只需要返回标题，不要包含标点符号：\n${content}`,
       {
         promptPrefix: '请用尽量简短的文字回复',

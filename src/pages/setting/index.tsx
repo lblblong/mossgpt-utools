@@ -1,6 +1,6 @@
-import { DeleteOutlined } from '@ant-design/icons'
+import { DeleteOutlined, SwapOutlined } from '@ant-design/icons'
 import { useStore, withStore } from '@libeilong/react-store-provider'
-import { Button, Form, Input, Select } from 'antd'
+import { AutoComplete, Button, Form, Input } from 'antd'
 import { Models } from '../../constance'
 import { withObserver } from '../../shared/func/withObserver'
 import { appStore } from '../../stores/app'
@@ -32,18 +32,26 @@ function _Page() {
         </Form.Item>
 
         <Form.Item label="模型">
-          <Select
+          <AutoComplete
             value={store.baseConfig.model}
-            onChange={(val) => (store.baseConfig.model = val)}
-          >
-            {Models.map((it, i) => {
-              return (
-                <Select.Option key={i} value={it}>
-                  {it}
-                </Select.Option>
-              )
+            options={Models.map((it) => {
+              return {
+                label: it,
+                value: it,
+              }
             })}
-          </Select>
+            onChange={(val) => (store.baseConfig.model = val)}
+          />
+        </Form.Item>
+
+        <Form.Item
+          label="Prompt"
+          tooltip="用于指定对话要开始的话题或上下文，它可以帮助 ChatGPT 更好地理解和回应用户的输入。"
+        >
+          <Input
+            value={store.baseConfig.prompt}
+            onChange={({ target }) => (store.baseConfig.prompt = target.value)}
+          />
         </Form.Item>
         <Form.Item>
           <Button type="primary" onClick={store.saveBaseConfig}>
@@ -63,6 +71,11 @@ function _Page() {
           type="link"
         >
           清除缓存
+        </Button>
+      </div>
+      <div>
+        <Button onClick={appStore.toggleTheme} icon={<SwapOutlined />}>
+          切换{appStore.isDark ? '明亮主题' : '夜间模式'}
         </Button>
       </div>
     </div>
