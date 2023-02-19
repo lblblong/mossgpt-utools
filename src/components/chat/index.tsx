@@ -1,4 +1,4 @@
-import { LoadingOutlined } from '@ant-design/icons'
+import { LoadingOutlined, SyncOutlined } from '@ant-design/icons'
 import { Space, Spin } from 'antd'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
@@ -6,29 +6,35 @@ import { FC, useLayoutEffect, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus as theme } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import styles from './index.module.scss'
-import { appStore } from '../../stores/app'
+import { Message } from '../../models/message'
 import { withObserver } from '../../shared/func/withObserver'
+import { appStore } from '../../stores/app'
+import styles from './index.module.scss'
+
+type ChatMessage = Pick<
+  Message,
+  'self' | 'id' | 'state' | 'text' | 'createdAt' | 'failedReason'
+>
 
 interface ChatProps {
-  messages: {
-    text: string
-    self: boolean
-    createdAt: number
-    id: string
-    state: 'sending' | 'failed' | 'persisted'
-  }[]
+  messages: ChatMessage[]
+  onRetry?: (message: ChatMessage) => void
 }
 
 export const Chat: FC<ChatProps> = (props) => {
   const firstRef = useRef(true)
-  const { messages } = props
+  const { messages, onRetry } = props
 
   useLayoutEffect(() => {
     if (firstRef.current) {
       const wrapEl = document.getElementById('chat-wrap')
       wrapEl!.scrollTop = wrapEl!.scrollHeight
     } else {
+      // document
+      //   .getElementById(messages[messages.length - 1].id)
+      //   ?.scrollIntoView({
+      //     behavior: firstRef.current ? 'auto' : 'smooth',
+      //   })
       document.getElementById('last-message')?.scrollIntoView({
         behavior: firstRef.current ? 'auto' : 'smooth',
       })
@@ -42,6 +48,15 @@ export const Chat: FC<ChatProps> = (props) => {
       className={clsx(styles.index, appStore.isDark && styles.dark)}
     >
       {messages.map((message) => {
+        let text = message.text
+        if (message.state === 'fail' && text.length === 0) {
+          text = message.failedReason || ''
+        }
+        const retryAction = (
+          <div className={styles.retryAction}>
+            <SyncOutlined onClick={() => onRetry && onRetry(message)} />
+          </div>
+        )
         return (
           <div
             className={clsx(
@@ -53,37 +68,45 @@ export const Chat: FC<ChatProps> = (props) => {
             }}
             id={message.id}
           >
-            <div className={styles.bubble}>
-              {message.self ? (
-                // 替换所有换行为br
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: `<p>${message.text.replace(/[\r\n]/g, '<br>')}</p>`,
-                  }}
-                ></div>
-              ) : (
-                <ReactMarkdown
-                  components={{
-                    code({ node, inline, className, children, ...props }) {
-                      const match = /language-(\w+)/.exec(className || '') || []
-                      return (
-                        <div className={styles.codeBox}>
-                          <SyntaxHighlighter
-                            children={String(children).replace(/\n$/, '')}
-                            style={theme as any}
-                            customStyle={{ borderRadius: 8 }}
-                            language={match[1] || 'javascript'}
-                            PreTag="div"
-                            {...props}
-                          />
-                        </div>
-                      )
-                    },
-                  }}
-                >
-                  {message.text}
-                </ReactMarkdown>
-              )}
+            <div className={styles.bubbleWrap}>
+              <div className={styles.bubble}>
+                {text === '' ? (
+                  <p>
+                    <SyncOutlined spin />
+                  </p>
+                ) : message.self ? (
+                  // 替换所有换行为br
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: `<p>${text.replace(/[\r\n]/g, '<br>')}</p>`,
+                    }}
+                  ></div>
+                ) : (
+                  <ReactMarkdown
+                    components={{
+                      code({ node, inline, className, children, ...props }) {
+                        const match =
+                          /language-(\w+)/.exec(className || '') || []
+                        return (
+                          <div className={styles.codeBox}>
+                            <SyntaxHighlighter
+                              children={String(children).replace(/\n$/, '')}
+                              style={theme as any}
+                              customStyle={{ borderRadius: 8 }}
+                              language={match[1] || 'javascript'}
+                              PreTag="div"
+                              {...props}
+                            />
+                          </div>
+                        )
+                      },
+                    }}
+                  >
+                    {text}
+                  </ReactMarkdown>
+                )}
+              </div>
+              {message.state === 'fail' && retryAction}
             </div>
             <div className={styles.time}>
               <Space>
@@ -97,8 +120,12 @@ export const Chat: FC<ChatProps> = (props) => {
                           indicator={<LoadingOutlined size={8} />}
                         />
                       ),
-                      failed: message.self ? '接收失败' : '发送失败',
-                      persisted: '',
+                      fail: (
+                        <span style={{ color: 'red' }}>
+                          {message.failedReason}
+                        </span>
+                      ),
+                      done: '',
                     }[message.state]
                   }
                 </span>

@@ -1,5 +1,6 @@
 import { ConfigProvider, theme } from 'antd'
 import { configure } from 'mobx'
+import { Observer } from 'mobx-react-lite'
 import { ManagerProvider } from 'oh-popup-react'
 import 'oh-popup-react/dist/style.css'
 import { RouterView } from 'oh-router-react'
@@ -9,7 +10,6 @@ import './assets/css/var.css'
 import { router } from './router'
 import { popupManager } from './shared/popupManager'
 import { appStore } from './stores/app'
-import { Observer } from 'mobx-react-lite'
 
 configure({ enforceActions: 'never' })
 
@@ -18,6 +18,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     {() => (
       <ConfigProvider
         theme={{
+          token: {
+            colorPrimary: '#1890ff',
+          },
           algorithm:
             appStore.theme === 'dark'
               ? theme.darkAlgorithm

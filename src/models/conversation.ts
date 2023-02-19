@@ -1,4 +1,3 @@
-import { message } from 'antd'
 import { makeAutoObservable } from 'mobx'
 import { Storage } from '../shared/storage'
 import { chatgptStore } from '../stores/chatgpt'
@@ -20,6 +19,8 @@ export class Conversation {
 
   private initialized = false
 
+  private loading = false
+
   get lastMessage() {
     return this.messages[this.messages.length - 1]
   }
@@ -32,61 +33,84 @@ export class Conversation {
 
   check = () => {
     if (!this.lastMessage) return
-    if (this.lastMessage.state !== 'persisted')
-      throw Error('请等待ChatGPT回复完成')
+    if (this.loading) throw Error('请等待上一条消息回复完成')
+    if (this.lastMessage.state === 'sending') {
+      throw Error('请等待上一条消息回复完成')
+    } else if (this.lastMessage.state === 'fail') {
+      this.resendMessage()
+      throw Error('请等待上一条消息回复完成')
+    }
   }
 
-  sendMessage = async (text: string) => {
+  private _sendMessage = async (
+    userMessage: Message,
+    chatgptMessage: Message
+  ) => {
     try {
+      this.loading = true
       const { prompt } = Storage.getConfig()
-      if (this.messages.length === 0 && this.name === '新会话') {
-        chatgptStore.getTitle(text).then((title) => {
+
+      await chatgptStore.sendMessage(userMessage.text, {
+        conversationId: userMessage.conversationId,
+        parentMessageId: userMessage.parentMessageId,
+        messageId: userMessage.id,
+        promptPrefix: prompt,
+        onProgress: ({ text }) => {
+          text = text.trim()
+          if (!text) return
+          chatgptMessage.text = text
+          chatgptMessage.flushDb()
+        },
+      })
+      chatgptMessage.state = 'done'
+
+      if (this.messages.length === 2 && this.name === '新会话') {
+        chatgptStore.getTitle(userMessage.text).then((title) => {
           this.name = title
           this.flushDb()
         })
       }
-
-      const lastMessage = this.lastMessage
-
-      const message = new Message({
-        role: 'user',
-        text,
-        createdAt: Date.now(),
-        state: 'sending',
-        conversationId: this.id,
-      }).waitPersisted()
-      this.messages.push(message)
-      this.flushDb()
-
-      let chatgptMessage: Message
-
-      await chatgptStore.sendMessage(text, {
-        conversationId: lastMessage?.conversationId,
-        parentMessageId: lastMessage?.id,
-        messageId: message.id,
-        promptPrefix: prompt,
-        onProgress: ({ id, text }) => {
-          if (!chatgptMessage) {
-            chatgptMessage = new Message({
-              id,
-              role: 'assistant',
-              text: text,
-              createdAt: Date.now(),
-              state: 'sending',
-              conversationId: this.id,
-            }).waitPersisted()
-            this.messages.push(chatgptMessage)
-            this.flushDb()
-          } else {
-            chatgptMessage.text = text
-          }
-          chatgptMessage.text = text
-        },
-      })
     } catch (err: any) {
-      console.log(err)
-      message.error(err.message)
+      chatgptMessage.state = 'fail'
+      chatgptMessage.failedReason = err.message
+    } finally {
+      chatgptMessage.flushDb()
+      this.loading = false
     }
+  }
+
+  sendMessage = async (text: string) => {
+    const lastMessage = this.lastMessage
+    const now = Date.now()
+    const userMessage = new Message({
+      role: 'user',
+      text,
+      createdAt: now,
+      state: 'done',
+      conversationId: this.id,
+      parentMessageId: lastMessage?.id,
+    }).flushDb()
+    let chatgptMessage = new Message({
+      role: 'assistant',
+      text: '',
+      createdAt: now + 1,
+      state: 'sending',
+      parentMessageId: userMessage.id,
+      conversationId: this.id,
+    }).flushDb()
+    this.messages.push(userMessage, chatgptMessage)
+    this._sendMessage(userMessage, chatgptMessage)
+  }
+
+  resendMessage = async () => {
+    const userMessage = this.messages[this.messages.length - 2]
+    const chatgptMessage = this.messages[this.messages.length - 1]
+    chatgptMessage.state = 'sending'
+    chatgptMessage.text = ''
+    chatgptMessage.createdAt = Date.now()
+    chatgptMessage.failedReason = undefined
+    chatgptMessage.flushDb()
+    this._sendMessage(userMessage, chatgptMessage)
   }
 
   flushDb = () => {

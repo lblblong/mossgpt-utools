@@ -19,7 +19,11 @@
       white-space: nowrap;
     }
   }
-  
+
+  .add:hover {
+    color: var(--color-primary);
+  }
+
   .active,
   .item:hover {
     background: var(--gray-0);

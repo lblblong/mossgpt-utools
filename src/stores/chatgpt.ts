@@ -1,8 +1,6 @@
 import { ChatGPTAPI, SendMessageOptions } from 'chatgpt'
 import { makeAutoObservable } from 'mobx'
-import { Message } from '../models/message'
 import { getChatGPTClient } from '../preload'
-import { globalEvent } from '../shared/event'
 import { Storage } from '../shared/storage'
 
 export const chatgptStore = new (class {
@@ -22,14 +20,7 @@ export const chatgptStore = new (class {
       completionParams: {
         model: config.model,
       },
-      getMessageById: async (id) => {
-        return utools.dbStorage.getItem('m-' + id)
-      },
-      upsertMessage: async (message) => {
-        if (message.conversationId === 'title') return
-        Storage.setMessage(Message.forChatMessage(message))
-        globalEvent.emit('persistedMessage', message.id)
-      },
+      getMessageById: async (id) => Storage.getMessage(id),
     })
   }
 
@@ -44,13 +35,10 @@ export const chatgptStore = new (class {
   }
 
   getTitle = async (content: string) => {
-    const res = await this.sendMessage(
-      `请为这段文字起个12个字以内的中文标题，只需要返回标题，不要包含标点符号：\n${content}`,
-      {
-        promptPrefix: '请用尽量简短的文字回复',
-        conversationId: 'title',
-      }
-    )
+    const res = await this.sendMessage(content, {
+      promptPrefix:
+        '请给发你的内容起一个12个字以内的标题，只需要返回标题文字即可',
+    })
     return res?.text.replace(/['"”“《》]/g, '') || content.slice(0, 10)
   }
 

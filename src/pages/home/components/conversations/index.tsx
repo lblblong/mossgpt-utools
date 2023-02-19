@@ -1,13 +1,14 @@
+import { PlusCircleOutlined, PlusSquareOutlined } from '@ant-design/icons'
 import clsx from 'clsx'
 import { useRef } from 'react'
 import { Item, Menu, useContextMenu } from 'react-contexify'
 import 'react-contexify/ReactContexify.css'
 import { Conversation } from '../../../../models/conversation'
 import { withObserver } from '../../../../shared/func/withObserver'
+import { appStore } from '../../../../stores/app'
 import { chatStore } from '../../../../stores/chat'
 import { homeStore } from '../../store'
 import styles from './index.module.scss'
-import { appStore } from '../../../../stores/app'
 
 export const Conversations = () => {
   const conversationRef = useRef<Conversation>()
@@ -17,8 +18,12 @@ export const Conversations = () => {
 
   return withObserver(() => (
     <div className={styles.index}>
-      <div className={styles.item} onClick={homeStore.createConversation}>
-        + 新建会话
+      <div
+        className={clsx(styles.item, styles.add)}
+        onClick={homeStore.createConversation}
+      >
+        <PlusCircleOutlined />
+        <span style={{ paddingLeft: 4 }}>新建会话</span>
       </div>
       <div className={styles.list}>
         {chatStore.conversations.map((it) => {

@@ -17,7 +17,6 @@ export class Storage {
       id: it.id,
       name: it.name,
       createdAt: it.createdAt,
-      messageIds: it.messages.map((m) => m.id),
     })
   }
 
@@ -36,6 +35,10 @@ export class Storage {
     utools.dbStorage.removeItem(`c-${id}`)
   }
 
+  static getMessage(id: string) {
+    return new Message(utools.dbStorage.getItem(`m-${id}`))
+  }
+
   static setMessage(it: Message) {
     utools.dbStorage.setItem(`m-${it.id}`, {
       id: it.id,
@@ -45,14 +48,19 @@ export class Storage {
       state: it.state,
       parentMessageId: it.parentMessageId,
       conversationId: it.conversationId,
+      failedReason: it.failedReason,
     })
   }
 
   static getMessagesByConversationId(id: string) {
-    const { messageIds } = utools.dbStorage.getItem(`c-${id}`)
-    return utools.db
-      .allDocs(messageIds.map((id: string) => `m-${id}`) as any)
-      .map(({ value }) => new Message(value))
+    return utools.db.allDocs(`m-${id}`).map(({ value }) => new Message(value))
+  }
+
+  static removeMessagesByConversationId(id: string) {
+    const ids = utools.db.allDocs(`m-${id}`).map((it) => it._id)
+    for (const id of ids) {
+      utools.db.remove(id)
+    }
   }
 
   static removeMessage(id: string) {

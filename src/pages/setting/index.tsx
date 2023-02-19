@@ -46,9 +46,10 @@ function _Page() {
 
         <Form.Item
           label="Prompt"
-          tooltip="用于指定对话要开始的话题或上下文，它可以帮助 ChatGPT 更好地理解和回应用户的输入。"
+          tooltip="用于指定对话要开始的话题或上下文，它可以帮助 AI 更好地理解和回应用户的输入。"
         >
-          <Input
+          <Input.TextArea
+            autoSize={{ minRows: 1, maxRows: 5 }}
             value={store.baseConfig.prompt}
             onChange={({ target }) => (store.baseConfig.prompt = target.value)}
           />

@@ -26,9 +26,7 @@ export const chatStore = new (class {
   removeConversation = (conversation: Conversation) => {
     this.conversations.splice(this.conversations.indexOf(conversation), 1)
     Storage.removeConversation(conversation.id)
-    for (const message of conversation.messages) {
-      Storage.removeMessage(message.id)
-    }
+    Storage.removeMessagesByConversationId(conversation.id)
   }
 
   destory = () => {

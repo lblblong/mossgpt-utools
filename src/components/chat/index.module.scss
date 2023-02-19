@@ -11,13 +11,17 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    .bubble {
-      border-radius: 8px;
-      padding: 0 12px;
-      max-width: 100%;
-      p {
-        margin: 8px 0;
-        line-height: 1.8;
+    .bubbleWrap {
+      display: inline-flex;
+      align-items: center;
+      .bubble {
+        border-radius: 8px;
+        padding: 0 12px;
+        max-width: 100%;
+        p {
+          margin: 8px 0;
+          line-height: 1.8;
+        }
       }
     }
     .time {
@@ -33,7 +37,7 @@
   }
   .user {
     .bubble {
-      background: #1e6eff;
+      background: var(--color-primary);
       color: #fff;
     }
   }
@@ -42,15 +46,20 @@
       background: #fff;
       color: #333;
     }
+    .retryAction {
+      padding-left: 8px;
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
   }
 }
 
 .dark {
-  .user,
   .chatgpt {
     .bubble {
-      background: var(--gray-0);
-      color: var(--gray-9);
+      background: rgba($color: #fff, $alpha: 0.08);
+      color: #fff;
     }
   }
 }

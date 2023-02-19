@@ -9,15 +9,11 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
-    "@keyv/sqlite": "^3.6.4",
     "@libeilong/react-store-provider": "^0.2.3",
     "antd": "^5.2.0",
-    "asar": "^3.2.0",
     "chatgpt": "4.2.0",
     "clsx": "^1.2.1",
-    "darkreader": "^4.9.58",
     "dayjs": "^1.11.6",
-    "keyv": "^4.5.2",
     "mitt": "^3.0.0",
     "mobx": "^6.6.2",
     "mobx-react-lite": "^3.4.0",
@@ -32,8 +28,7 @@
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.5",
     "react-syntax-highlighter": "^15.5.0",
-    "uuid": "^9.0.0",
-    "wechaty": "^1.20.2"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.8.5",
