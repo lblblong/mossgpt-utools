@@ -40,7 +40,7 @@ export const chatgptStore = new (class {
     content: string,
     onProgress: (opts: { text: string }) => void
   ) => {
-    const res = await this.sendMessage(content, {
+    await this.sendMessage(content, {
       systemMessage:
         '请为发给你的内容起一个12个字以内的简短标题，只需要返回标题文字即可。比如内容是：买手机看什么参数。则你可以回复：购机攻略',
       onProgress: ({ text }) => {

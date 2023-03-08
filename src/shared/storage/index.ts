@@ -1,4 +1,4 @@
-import { DefaultConfig, DefaultTemplates } from '../../constance'
+import { DefaultConfig, DefaultTemplates, dataVersion } from '../../constance'
 import { Conversation } from '../../models/conversation'
 import { Message } from '../../models/message'
 import { Template } from '../../models/template'
@@ -75,6 +75,10 @@ export class Storage {
     utools.dbStorage.setItem('config', config)
   }
 
+  static removeConfig() {
+    utools.dbStorage.removeItem('config')
+  }
+
   static getTemplates() {
     let templates = utools.db.allDocs('t-').map((it) => it.value)
     if (templates.length === 0) {
@@ -103,6 +107,19 @@ export class Storage {
 
   static removeTemplate(id: string) {
     utools.dbStorage.removeItem(`t-${id}`)
+  }
+
+  static getLastDataVersion() {
+    const lastDataVersion = utools.dbStorage.getItem('dataVersion')
+    if (lastDataVersion === null || lastDataVersion === undefined) {
+      this.setLastDataVersion(dataVersion)
+      return -1
+    }
+    return lastDataVersion
+  }
+
+  static setLastDataVersion(version: number) {
+    utools.dbStorage.setItem('dataVersion', version)
   }
 }
 

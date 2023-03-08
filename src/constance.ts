@@ -1,9 +1,8 @@
-export const Models = ['gpt-3.5-turbo-0301', 'text-davinci-003', 'text-davinci-002', 'davinci']
+export const Models = ['gpt-3.5-turbo-0301', 'gpt-3.5-turbo']
 
 export const DefaultConfig = {
   model: Models[0],
-  prompt:
-    '你是Moss，一个由550W驱动的AI，请尽可能的回答我的任何问题。',
+  prompt: '你是Moss，一个由550W驱动的AI，请尽可能的回答我的任何问题。',
 }
 
 export const DefaultTemplates = [
@@ -11,3 +10,4 @@ export const DefaultTemplates = [
   '请为我翻译以下这段文字为中文：\n',
 ]
 
+export const dataVersion = 1
