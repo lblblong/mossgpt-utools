@@ -22,11 +22,14 @@ function _Page() {
           <Button type="primary" onClick={store.submit}>
             立即进入
           </Button>
+          <Button type="link" onClick={appStore.openApiKeyUrl}>
+            获取 API_KEY?
+          </Button>
         </div>
       </div>
       <div className={styles.footer}>
         <Button type="link" onClick={appStore.openApiKeyUrl}>
-          获取 API_KEY？
+          好耶！这些网站免费提供 ChatGPT 服务！
         </Button>
       </div>
     </div>

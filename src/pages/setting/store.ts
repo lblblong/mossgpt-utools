@@ -6,8 +6,11 @@ import { chatStore } from '../../stores/chat'
 import { chatgptStore } from '../../stores/chatgpt'
 import { homeStore } from '../home/store'
 
+let time: NodeJS.Timer
+
 export class Store {
   constructor() {
+    clearInterval(time)
     makeAutoObservable(this)
     this.baseConfig = {
       ...Storage.getConfig(),
@@ -20,7 +23,13 @@ export class Store {
       convs,
       msgs,
     }
+
+    time = setInterval(() => {
+      this.currentLink = this.currentLink === 1 ? 0 : 1
+    }, 3000)
   }
+
+  currentLink = 0
 
   storage: {
     convs: string[]

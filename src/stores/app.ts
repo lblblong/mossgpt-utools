@@ -20,6 +20,12 @@ export const appStore = new (class {
     utools.shellOpenExternal('https://platform.openai.com/account/api-keys')
   }
 
+  openShareUrl = () => {
+    utools.shellOpenExternal(
+      'https://github.com/lblblong/mossgpt-utools/issues/4'
+    )
+  }
+
   toggleTheme = () => {
     this.setTheme(this.theme === 'dark' ? 'light' : 'dark')
   }

@@ -18,10 +18,26 @@ function _Page() {
         <Form.Item
           label={
             <span>
-              API_KEY
-              <Button size="small" type="link" onClick={appStore.openApiKeyUrl}>
-                (重新获取API_KEY)
-              </Button>
+              API_KEY (
+              {
+                [
+                  <Button
+                    size="small"
+                    type="link"
+                    onClick={appStore.openApiKeyUrl}
+                  >
+                    重新获取API_KEY
+                  </Button>,
+                  <Button
+                    size="small"
+                    type="link"
+                    onClick={appStore.openShareUrl}
+                  >
+                    好耶！这些网站免费提供 ChatGPT 服务！
+                  </Button>,
+                ][store.currentLink]
+              }
+              )
             </span>
           }
         >

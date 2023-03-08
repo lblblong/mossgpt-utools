@@ -3,7 +3,7 @@ import { withObserver } from '../../shared/func/withObserver'
 import styles from './index.module.scss'
 import { Store } from './store'
 
-function _WechatRobot() {
+function _Page() {
   const store = useStore<Store>()
 
   return withObserver(() => (
@@ -11,5 +11,5 @@ function _WechatRobot() {
   ))
 }
 
-export const WechatRobot = withStore(_WechatRobot, Store)
+export const Page = withStore(_Page, Store)
 
