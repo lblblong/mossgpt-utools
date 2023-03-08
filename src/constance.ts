@@ -1,4 +1,4 @@
-export const Models = ['text-davinci-003', 'text-davinci-002', 'davinci']
+export const Models = ['gpt-3.5-turbo-0301', 'text-davinci-003', 'text-davinci-002', 'davinci']
 
 export const DefaultConfig = {
   model: Models[0],

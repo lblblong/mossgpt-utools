@@ -11,7 +11,7 @@
     "@ant-design/icons": "^5.0.1",
     "@libeilong/react-store-provider": "^0.2.3",
     "antd": "^5.2.0",
-    "chatgpt": "4.2.0",
+    "@libeilong/chatgpt": "5.0.8",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.6",
     "mitt": "^3.0.0",

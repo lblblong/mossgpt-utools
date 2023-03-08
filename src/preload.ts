@@ -3,7 +3,7 @@ import {
   GetMessageByIdFunction,
   UpsertMessageFunction,
   openai,
-} from 'chatgpt'
+} from '@libeilong/chatgpt'
 
 export function getChatGPTClient(opts: {
   apiKey: string
@@ -11,7 +11,7 @@ export function getChatGPTClient(opts: {
   apiBaseUrl?: string
   /** @defaultValue `false` **/
   debug?: boolean
-  completionParams?: Partial<openai.CompletionParams>
+  completionParams?: Partial<Omit<openai.CreateChatCompletionRequest, 'messages' | 'n'>>
   /** @defaultValue `4096` **/
   maxModelTokens?: number
   /** @defaultValue `1000` **/

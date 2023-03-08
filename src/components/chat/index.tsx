@@ -109,9 +109,14 @@ export const Chat: FC<ChatProps> = (props) => {
               {message.state === 'fail' && retryAction}
             </div>
             <div className={styles.time}>
-              <Space>
-                <span>{dayjs(message.createdAt).format('MM-DD HH:mm')}</span>
-                <span>
+              <span>{dayjs(message.createdAt).format('MM-DD HH:mm')}</span>
+              {message.state !== 'done' && (
+                <span
+                  className={styles.state}
+                  style={{
+                    color: message.state === 'fail' ? 'red' : undefined,
+                  }}
+                >
                   {
                     {
                       sending: (
@@ -120,16 +125,11 @@ export const Chat: FC<ChatProps> = (props) => {
                           indicator={<LoadingOutlined size={8} />}
                         />
                       ),
-                      fail: (
-                        <span style={{ color: 'red' }}>
-                          {message.failedReason}
-                        </span>
-                      ),
-                      done: '',
+                      fail: message.failedReason,
                     }[message.state]
                   }
                 </span>
-              </Space>
+              )}
             </div>
           </div>
         )

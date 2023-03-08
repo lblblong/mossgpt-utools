@@ -1,4 +1,4 @@
-import { ChatMessage } from 'chatgpt'
+import { ChatMessage } from '@libeilong/chatgpt'
 import { makeAutoObservable } from 'mobx'
 import { Storage } from '../shared/storage'
 

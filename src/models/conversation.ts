@@ -42,6 +42,15 @@ export class Conversation {
     }
   }
 
+  generateTitle = async (text: string) => {
+    await chatgptStore.getTitle(text, ({ text }) => {
+      text = text.trim()
+      if (!text) return
+      this.name = text
+    })
+    this.flushDb()
+  }
+
   private _sendMessage = async (
     userMessage: Message,
     chatgptMessage: Message
@@ -51,10 +60,9 @@ export class Conversation {
       const { prompt } = Storage.getConfig()
 
       await chatgptStore.sendMessage(userMessage.text, {
-        conversationId: userMessage.conversationId,
         parentMessageId: userMessage.parentMessageId,
         messageId: userMessage.id,
-        promptPrefix: prompt,
+        systemMessage: prompt,
         onProgress: ({ text }) => {
           text = text.trim()
           if (!text) return
@@ -65,10 +73,7 @@ export class Conversation {
       chatgptMessage.state = 'done'
 
       if (this.messages.length === 2 && this.name === '新会话') {
-        chatgptStore.getTitle(userMessage.text).then((title) => {
-          this.name = title
-          this.flushDb()
-        })
+        this.generateTitle(userMessage.text)
       }
     } catch (err: any) {
       chatgptMessage.state = 'fail'
