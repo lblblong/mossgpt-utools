@@ -36,9 +36,5 @@ export default defineConfig({
       buildUpx: false,
     }),
   ],
-  build: {
-    outDir: '/mnt/c/code/utools/mossgpt',
-    emptyOutDir: true
-  },
 })
 
