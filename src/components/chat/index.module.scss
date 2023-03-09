@@ -5,6 +5,51 @@
   overflow-x: hidden;
   overflow-y: auto;
   .codeBox {
+    border-radius: 8px;
+    box-shadow: var(--gray-1) 0px 5px 15px 0px;
+    // TODO: 滚动条的伪变量暂时写在这里, 等待后续将所有的滚动条样式统一后再移除
+    ::-webkit-scrollbar {
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: #f1f1f1;
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #aaa;
+    }
+    .codeHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 12px;
+      background-color: #f2f2f2;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    .codeLanguage {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+    }
+    .codeCopyButton {
+      display: flex;
+      align-items: center;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      color: #666;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        color: #222;
+      }
+    }
   }
   .item {
     padding: 8px;

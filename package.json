@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
+    "@libeilong/chatgpt": "5.0.8",
     "@libeilong/react-store-provider": "^0.2.3",
     "antd": "^5.2.0",
-    "@libeilong/chatgpt": "5.0.8",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.6",
     "mitt": "^3.0.0",
@@ -25,6 +25,7 @@
     "qs": "^6.11.0",
     "react": "^18.2.0",
     "react-contexify": "^6.0.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.5",
     "react-syntax-highlighter": "^15.5.0",
