@@ -14,13 +14,17 @@
     .bubbleWrap {
       display: inline-flex;
       align-items: center;
+      max-width: 100%;
       .bubble {
         border-radius: 8px;
         padding: 0 12px;
-        max-width: 100%;
+        word-break: break-all;
         p {
           margin: 8px 0;
           line-height: 1.8;
+        }
+        img {
+          max-width: 100%;
         }
       }
     }
