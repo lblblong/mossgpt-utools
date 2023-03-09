@@ -7,6 +7,7 @@ export const InputArea = () => {
   const [value, setValue] = useState('')
   const onSubmit = () => {
     try {
+      if (value.trim() === '') return
       homeStore.conversation?.check()
       homeStore.conversation?.sendMessage(value)
       setValue('')
