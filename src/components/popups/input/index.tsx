@@ -23,6 +23,8 @@ const Input: FC<Props> = ({ title, placeholder }) => {
         placeholder={placeholder}
         value={value}
         onChange={({ target }) => setValue(target.value)}
+        onPressEnter={() => ctl.close(value)}
+        autoFocus
       />
       <div className={styles.actions}>
         <Button onClick={() => ctl.onlyClose()}>取消</Button>
