@@ -25,7 +25,7 @@ export const InputArea = () => {
         }}
         onKeyDown={(event) => {
           if (event.key === 'Enter') {
-            if (event.ctrlKey) {
+            if (event.ctrlKey || event.shiftKey) {
               setValue((value) => value + '\n')
             } else {
               event.preventDefault()
