@@ -88,6 +88,7 @@ export const Chat: FC<ChatProps> = (props) => {
                         const match =
                           /language-(\w+)/.exec(className || '') || []
                         return (
+                          !inline && match ? (
                           <div className={styles.codeBox}>
                             <SyntaxHighlighter
                               children={String(children).replace(/\n$/, '')}
@@ -98,6 +99,11 @@ export const Chat: FC<ChatProps> = (props) => {
                               {...props}
                             />
                           </div>
+                          ) : (
+                            <code className={className} {...props}>
+                              {children}
+                            </code>
+                          )
                         )
                       },
                     }}
