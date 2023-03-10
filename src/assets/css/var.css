@@ -17,6 +17,10 @@
   --gray-8: rgba(0, 0, 0, 0.85);
   --gray-9: rgba(0, 0, 0, 0.95);
   --gray-x: rgba(0, 0, 0);
+
+  --scrollbar-thumb--border-color: transparent;
+  --scrollbar-thumb--background-color: rgba(226, 226, 226);
+  --scrollbar-track-piece--background-color: rgba(255, 255, 255);
 }
 
 .dartTheme {
@@ -34,5 +38,8 @@
   --gray-8: rgba(255, 255, 255, 0.85);
   --gray-9: rgba(255, 255, 255, 0.95);
   --gray-x: rgba(255, 255, 255);
+
+  --scrollbar-thumb--background-color: rgba(255, 255, 255, 0.33);
+  --scrollbar-track-piece--background-color: rgba(255, 255, 255, 0.06);
 }
 
