@@ -4,19 +4,21 @@
 
 欢迎 start ✨
 
-[![ppmBXPs.png](https://s1.ax1x.com/2023/03/08/ppmBXPs.png)](https://imgse.com/i/ppmBXPs)
+[![ppu49eJ.png](https://s1.ax1x.com/2023/03/10/ppu49eJ.png)](https://imgse.com/i/ppu49eJ)
 
 ## 安装
 
 首先需要下载安装 utools：https://www.u.tools/
 
-然后进入 utools 的 `插件市场` 搜索 `chatgpt` 找到插件进行安装
+然后进入 utools 的 `插件市场` 搜索 `mossgpt` 找到插件进行安装
 
-[![ppmDuqO.png](https://s1.ax1x.com/2023/03/08/ppmDuqO.png)](https://imgse.com/i/ppmDuqO)
+[![ppu4Kwd.png](https://s1.ax1x.com/2023/03/10/ppu4Kwd.png)](https://imgse.com/i/ppu4Kwd)
 
 ## 部分界面
 
-[![ppmBjGn.png](https://s1.ax1x.com/2023/03/08/ppmBjGn.png)](https://imgse.com/i/ppmBjGn)
+[![ppu4SL4.png](https://s1.ax1x.com/2023/03/10/ppu4SL4.png)](https://imgse.com/i/ppu4SL4)
 
-[![ppmBL5j.png](https://s1.ax1x.com/2023/03/08/ppmBL5j.png)](https://imgse.com/i/ppmBL5j)
+[![ppuhzyF.png](https://s1.ax1x.com/2023/03/10/ppuhzyF.png)](https://imgse.com/i/ppuhzyF)
+
+[![ppu4Cw9.png](https://s1.ax1x.com/2023/03/10/ppu4Cw9.png)](https://imgse.com/i/ppu4Cw9)
 
