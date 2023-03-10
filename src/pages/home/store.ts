@@ -4,8 +4,13 @@ import { openTemplatePopup } from '../../components/popups/template'
 import { Conversation } from '../../models/conversation'
 import { chatStore } from '../../stores/chat'
 import { toTranslation } from '../translation/route'
+import { Store as InputStore } from './components/inputArea/store'
 
 export const homeStore = new (class {
+  stores = {
+    input: new InputStore(),
+  }
+
   constructor() {
     makeAutoObservable(this)
 

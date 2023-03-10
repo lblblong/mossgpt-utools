@@ -1,49 +1,31 @@
-import { Button, Space, message } from 'antd'
-import { useState } from 'react'
+import { Button, Space } from 'antd'
+import { withObserver } from '../../../../shared/func/withObserver'
 import { homeStore } from '../../store'
 import styles from './index.module.scss'
 
 export const InputArea = () => {
-  const [value, setValue] = useState('')
-  const [isCompositionStarted, setIsCompositionStarted] = useState(false)
+  const store = homeStore.stores.input
 
-  const onSubmit = () => {
-    try {
-      if (value.trim() === '') return
-      homeStore.conversation?.check()
-      homeStore.conversation?.sendMessage(value)
-      setValue('')
-    } catch (err: any) {
-      message.info(err.message)
-    }
-  }
-
-  return (
+  return withObserver(() => (
     <div className={styles.index}>
       <textarea
         className={styles.input}
-        value={value}
-        onChange={({ target }) => {
-          setValue(target.value)
-        }}
-        onCompositionStart={() => {
-          setIsCompositionStarted(true)
-        }}
+        value={store.value}
+        onChange={({ target }) => (store.value = target.value)}
+        onCompositionStart={() => (store.isCompositionStarted = true)}
+        onCompositionEnd={() => (store.isCompositionStarted = false)}
         onKeyDown={(event) => {
-          if (isCompositionStarted) {
+          if (store.isCompositionStarted) {
             return
           }
           if (event.key === 'Enter') {
             if (event.ctrlKey || event.shiftKey) {
-              setValue((value) => value + '\n')
+              store.value += '\n'
             } else {
               event.preventDefault()
-              onSubmit()
+              store.onSubmit()
             }
           }
-        }}
-        onCompositionEnd={() => {
-          setIsCompositionStarted(false)
         }}
       />
       <div className={styles.submitWrap}>
@@ -51,12 +33,12 @@ export const InputArea = () => {
           <Button size="small" onClick={homeStore.onOpenTemplate}>
             消息模板
           </Button>
-          <Button size="small" type="primary" onClick={onSubmit}>
+          <Button size="small" type="primary" onClick={store.onSubmit}>
             发送
           </Button>
         </Space>
       </div>
     </div>
-  )
+  ))
 }
 
