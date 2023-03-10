@@ -1,8 +1,8 @@
-import { CopyOutlined, LoadingOutlined, SyncOutlined } from '@ant-design/icons'
+import { CopyOutlined, CheckOutlined, LoadingOutlined, SyncOutlined } from '@ant-design/icons'
 import { Space, Spin } from 'antd'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
-import { FC, useLayoutEffect, useRef } from 'react'
+import { FC, useLayoutEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus as theme } from 'react-syntax-highlighter/dist/esm/styles/prism'
@@ -88,6 +88,14 @@ export const Chat: FC<ChatProps> = (props) => {
                       code({ node, inline, className, children, ...props }) {
                         const match =
                           /language-(\w+)/.exec(className || '') || []
+                        const [copied, setCopied] = useState(false)
+                        const handleCopy = (text: string) => {
+                          setCopied(true)
+                          copyToClipboard(text)
+                          setTimeout(() => {
+                            setCopied(false)
+                          }, 2000)
+                        }
                         return !inline && match ? (
                           <div className={styles.codeBox}>
                             <SyntaxHighlighter
@@ -100,9 +108,13 @@ export const Chat: FC<ChatProps> = (props) => {
                             />
                             <div
                               className={styles.copyBtn}
-                              onClick={() => copyToClipboard(String(children))}
+                              onClick={() => handleCopy(String(children))}
                             >
-                              <CopyOutlined />
+                              {copied ? (
+                                <CheckOutlined />
+                              ) : (
+                                <CopyOutlined />
+                              )}
                             </div>
                           </div>
                         ) : (
