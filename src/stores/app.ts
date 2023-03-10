@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import { Storage } from '../shared/storage'
 
 export const appStore = new (class {
   theme: 'light' | 'dark' = 'light'
@@ -9,11 +10,7 @@ export const appStore = new (class {
 
   constructor() {
     makeAutoObservable(this)
-    if (utools.isDarkColors()) {
-      this.setTheme('dark')
-    } else {
-      this.setTheme('light')
-    }
+    this.setTheme(Storage.getTheme())
   }
 
   openApiKeyUrl = () => {
@@ -28,6 +25,7 @@ export const appStore = new (class {
 
   toggleTheme = () => {
     this.setTheme(this.theme === 'dark' ? 'light' : 'dark')
+    Storage.setTheme(this.theme)
   }
 
   setTheme = (theme: 'light' | 'dark') => {

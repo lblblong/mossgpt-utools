@@ -122,5 +122,15 @@ export class Storage {
   static setLastDataVersion(version: number) {
     utools.dbStorage.setItem('dataVersion', version)
   }
+
+  static setTheme(theme: string) {
+    utools.dbStorage.setItem('theme', theme)
+  }
+
+  static getTheme() {
+    const theme = utools.dbStorage.getItem('theme')
+    if (theme) return theme
+    else return utools.isDarkColors() ? 'dark' : 'light'
+  }
 }
 
