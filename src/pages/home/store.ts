@@ -3,15 +3,19 @@ import { openInput } from '../../components/popups/input'
 import { openTemplatePopup } from '../../components/popups/template'
 import { Conversation } from '../../models/conversation'
 import { chatStore } from '../../stores/chat'
+import { toTranslation } from '../translation/route'
 
 export const homeStore = new (class {
   constructor() {
     makeAutoObservable(this)
 
     utools.onPluginEnter(({ code, payload }) => {
-      if (code !== 'text') return
-      this.createConversation()
-      this.conversation?.sendMessage(payload)
+      if (code === 'text') {
+        this.createConversation()
+        this.conversation?.sendMessage(payload)
+      } else if (code === 'translation') {
+        toTranslation({ query: { text: payload } })
+      }
     })
   }
 

@@ -3,9 +3,9 @@ import { Outlet, useLocation } from 'oh-router-react'
 import { Icon } from '../../components/icon'
 import { homeRoute, toHome } from '../../pages/home/route'
 import { settingRoute, toSetting } from '../../pages/setting/route'
-import { templateRoute } from '../../pages/template/route'
+import { templateRoute, toTemplate } from '../../pages/template/route'
 import { templateFormRoute } from '../../pages/templateForm/route'
-import { router } from '../../router'
+import { toTranslation } from '../../pages/translation/route'
 import { withObserver } from '../../shared/func/withObserver'
 import { appStore } from '../../stores/app'
 import styles from './index.module.scss'
@@ -20,17 +20,17 @@ export const BasicLayout = () => {
       active: location.pathname === homeRoute.path,
     },
     {
+      icon: 'translation',
+      onClick: () => toTranslation(),
+      active: location.pathname === '/translation',
+    },
+    {
       icon: 'template',
-      onClick: () => router.navigate('/template'),
+      onClick: () => toTemplate(),
       active: [templateRoute.path, templateFormRoute.path].includes(
         location.pathname
       ),
     },
-    // {
-    //   icon: 'robot',
-    //   onClick: () => router.navigate('/wechatRobot'),
-    //   active: location.pathname === '/wechatRobot',
-    // },
     {
       icon: 'setting',
       onClick: () => toSetting(),

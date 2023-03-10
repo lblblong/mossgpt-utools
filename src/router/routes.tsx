@@ -5,6 +5,7 @@ import { launchRoute } from '../pages/launch/route'
 import { settingRoute } from '../pages/setting/route'
 import { templateRoute } from '../pages/template/route'
 import { templateFormRoute } from '../pages/templateForm/route'
+import { translationRoute } from '../pages/translation/route'
 import { wechatRobotRoute } from '../pages/wechatRobot/route'
 
 export interface Meta {
@@ -22,6 +23,7 @@ export const routes: RouteObject<Meta>[] = [
     children: [
       homeRoute,
       templateRoute,
+      translationRoute,
       templateFormRoute,
       wechatRobotRoute,
       settingRoute,

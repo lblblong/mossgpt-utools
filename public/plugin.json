@@ -25,6 +25,18 @@
           "maxLength": 500
         }
       ]
+    },
+    {
+      "code": "translation",
+      "explain": "Moss 翻译",
+      "cmds": [
+        {
+          "type": "over",
+          "label": "Moss 翻译",
+          "minLength": 1,
+          "maxLength": 3000
+        }
+      ]
     }
   ]
 }

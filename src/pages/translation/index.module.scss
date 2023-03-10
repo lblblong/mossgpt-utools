@@ -1,0 +1,45 @@
+.index {
+  background: rgba($color: #000000, $alpha: 0.03);
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+
+  .sourceBox,
+  .targetBox {
+    flex: 1;
+    > * {
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      border-radius: 8px;
+      padding: 12px;
+      line-height: 1.8;
+    }
+  }
+
+  .targetBox {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .toolbarBox {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.dark {
+  background: #000;
+  .sourceBox,
+  .targetBox {
+    > * {
+      background: rgba($color: #ffffff, $alpha: 0.06);
+    }
+  }
+}
+
