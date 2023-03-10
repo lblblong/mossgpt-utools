@@ -33,8 +33,14 @@ export function Page() {
       </div>
 
       <div className={styles.targetBox}>
-        <div>{translationStore.target}</div>
-        {translationStore.err && <div className={styles.err}>{translationStore.err.message}</div>}
+        <div
+          dangerouslySetInnerHTML={{
+            __html: translationStore.target.replaceAll('\n', '<br/>'),
+          }}
+        ></div>
+        {translationStore.err && (
+          <div className={styles.err}>{translationStore.err.message}</div>
+        )}
       </div>
     </div>
   ))
