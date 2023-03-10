@@ -15,7 +15,7 @@ interface Props {
 
 const Input: FC<Props> = ({ title, placeholder, defaultValue }) => {
   const ctl = useController()
-  const [value, setValue] = useState(defaultValue)
+  const [value, setValue] = useState(defaultValue || '')
 
   return withObserver(() => (
     <div className={clsx(styles.index, appStore.isDark && styles.dark)}>
