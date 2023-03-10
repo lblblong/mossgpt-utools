@@ -100,7 +100,9 @@ export const Chat: FC<ChatProps> = (props) => {
                             />
                             <div
                               className={styles.copyBtn}
-                              onClick={() => copyToClipboard(String(children))}
+                              onClick={() =>
+                                copyToClipboard(String(children).trim())
+                              }
                             >
                               <CopyOutlined />
                             </div>
