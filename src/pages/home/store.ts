@@ -37,7 +37,7 @@ export const homeStore = new (class {
 
   changeConversationTitle = async (conversation?: Conversation) => {
     if (!conversation) return
-    const name = await openInput({ title: '请输入新的会话名称' })
+    const name = await openInput({ title: '请输入新的会话名称', defaultValue: conversation.name })
     if (!name) return
     conversation.name = name
     conversation.flushDb()

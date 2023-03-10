@@ -10,11 +10,12 @@ import styles from './index.module.scss'
 interface Props {
   title: string
   placeholder?: string
+  defaultValue?: string
 }
 
-const Input: FC<Props> = ({ title, placeholder }) => {
+const Input: FC<Props> = ({ title, placeholder, defaultValue }) => {
   const ctl = useController()
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(defaultValue)
 
   return withObserver(() => (
     <div className={clsx(styles.index, appStore.isDark && styles.dark)}>
@@ -25,6 +26,7 @@ const Input: FC<Props> = ({ title, placeholder }) => {
         onChange={({ target }) => setValue(target.value)}
         onPressEnter={() => ctl.close(value)}
         autoFocus
+        allowClear
       />
       <div className={styles.actions}>
         <Button onClick={() => ctl.onlyClose()}>取消</Button>
