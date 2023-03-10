@@ -97,7 +97,7 @@ export const Chat: FC<ChatProps> = (props) => {
                                 borderRadius: 8,
                                 background: appStore.isDark
                                   ? '#000000'
-                                  : undefined,
+                                  : '#1E1E1E',
                               }}
                               language={match[1] || 'javascript'}
                               PreTag="div"
