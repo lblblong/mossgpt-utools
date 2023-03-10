@@ -26,6 +26,13 @@
       }
     }
   }
+  .inlineCode {
+    font-family: inherit;
+    font-size: 12px;
+    padding: 2px 8px;
+    background: #f6f7f9;
+    color: #d56161;
+  }
   .item {
     padding: 8px;
     display: flex;
@@ -88,6 +95,10 @@
 }
 
 .dark {
+  .inlineCode {
+    background: rgba($color: #fff, $alpha: 0.08);
+    color: #ff7875;
+  }
   .chatgpt {
     .bubble {
       background: rgba($color: #fff, $alpha: 0.08);

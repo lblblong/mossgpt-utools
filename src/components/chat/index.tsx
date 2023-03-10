@@ -108,7 +108,7 @@ export const Chat: FC<ChatProps> = (props) => {
                             </div>
                           </div>
                         ) : (
-                          <code className={className} {...props}>
+                          <code className={clsx(className, styles.inlineCode)} {...props}>
                             {children}
                           </code>
                         )
