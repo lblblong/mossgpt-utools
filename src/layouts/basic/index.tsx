@@ -32,11 +32,6 @@ export const BasicLayout = () => {
       ),
     },
     {
-      icon: 'setting',
-      onClick: () => toSetting(),
-      active: location.pathname === settingRoute.path,
-    },
-    {
       icon: 'github',
       onClick: () =>
         utools.shellOpenExternal('https://github.com/lblblong/mossgpt-utools'),
@@ -62,9 +57,9 @@ export const BasicLayout = () => {
           ))}
         </div>
         <div>
-          {/* <div className={styles.menu} onClick={() => {}}>
-            <Icon value="menu" />
-          </div> */}
+          <div className={styles.menu} onClick={() => toSetting()}>
+            <Icon value="setting" />
+          </div>
         </div>
       </div>
       <div className={styles.main}>

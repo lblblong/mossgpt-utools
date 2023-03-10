@@ -23,6 +23,8 @@ export const translationStore = new (class {
   source = ''
   target = ''
 
+  err?: Error
+
   timer?: NodeJS.Timeout
 
   onSourceChange = (text: string) => {
@@ -31,14 +33,19 @@ export const translationStore = new (class {
     this.timer = setTimeout(this.start, 600)
   }
 
-  start = () => {
+  start = async () => {
     if (this.source.trim() === '') return
-    const { targetLang } = this.config
-    chatgptStore.sendMessage(`下面我让你来充当翻译家，你的目标是把任何语言翻译成${targetLang}，请翻译时不要带翻译腔，而是要翻译得自然、流畅和地道，使用优美和高雅的表达方式。请翻译下面的内容：\n${this.source}`, {
-      onProgress: ({ text }) => {
-        this.target = text
-      }
-    })
+    this.err = undefined
+    try {
+      const { targetLang } = this.config
+      await chatgptStore.sendMessage(`下面我让你来充当翻译家，你的目标是把任何语言翻译成${targetLang}，请翻译时不要带翻译腔，而是要翻译得自然、流畅和地道，使用优美和高雅的表达方式。请翻译下面的内容：\n${this.source}`, {
+        onProgress: ({ text }) => {
+          this.target = text
+        }
+      })
+    } catch (err: any) {
+      this.err = err
+    }
   }
 
   reverse = () => {
