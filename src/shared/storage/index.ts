@@ -2,6 +2,7 @@ import { DefaultConfig, DefaultTemplates, dataVersion } from '../../constance'
 import { Conversation } from '../../models/conversation'
 import { Message } from '../../models/message'
 import { Template } from '../../models/template'
+import { IConfig } from '../../types'
 
 export class Storage {
   static getApiKey() {
@@ -67,11 +68,11 @@ export class Storage {
     utools.dbStorage.removeItem(`m-${id}`)
   }
 
-  static getConfig(): typeof DefaultConfig {
+  static getConfig(): IConfig {
     return Object.assign({}, DefaultConfig, utools.dbStorage.getItem('config'))
   }
 
-  static setConfig(config: typeof DefaultConfig) {
+  static setConfig(config: IConfig) {
     utools.dbStorage.setItem('config', config)
   }
 

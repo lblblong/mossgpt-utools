@@ -17,11 +17,13 @@ export const chatgptStore = new (class {
 
     const apiKey = Storage.getApiKey()
     const config = Storage.getConfig()
+
     this.client = getChatGPTClient({
       apiKey,
       completionParams: {
         model: config.model,
       },
+      proxy: config.proxy?.open ? config.proxy : undefined,
       getMessageById: async (id) => Storage.getMessage(id),
     })
   }

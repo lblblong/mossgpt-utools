@@ -1,8 +1,15 @@
+import { IConfig } from "./types"
+
 export const Models = ['gpt-3.5-turbo-0301', 'gpt-3.5-turbo']
 
-export const DefaultConfig = {
+export const DefaultConfig: IConfig = {
   model: Models[0],
   prompt: '你是Moss，一个由550W驱动的AI，请尽可能的回答我的任何问题。',
+  proxy: {
+    open: false,
+    host: undefined,
+    port: undefined
+  }
 }
 
 export const DefaultTemplates = [

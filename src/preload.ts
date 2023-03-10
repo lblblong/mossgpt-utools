@@ -1,29 +1,31 @@
 import {
   ChatGPTAPI,
-  GetMessageByIdFunction,
-  UpsertMessageFunction,
-  openai,
-} from '@libeilong/chatgpt'
+  ChatGPTAPIOptions
+} from '@libeilong/chatgpt';
+import proxy from "https-proxy-agent";
+import nodeFetch from "node-fetch";
 
-export function getChatGPTClient(opts: {
-  apiKey: string
-  /** @defaultValue `'https://api.openai.com'` **/
-  apiBaseUrl?: string
-  /** @defaultValue `false` **/
-  debug?: boolean
-  completionParams?: Partial<Omit<openai.CreateChatCompletionRequest, 'messages' | 'n'>>
-  /** @defaultValue `4096` **/
-  maxModelTokens?: number
-  /** @defaultValue `1000` **/
-  maxResponseTokens?: number
-  /** @defaultValue `'User'` **/
-  userLabel?: string
-  /** @defaultValue `'ChatGPT'` **/
-  assistantLabel?: string
-  messageStore?: any
-  getMessageById?: GetMessageByIdFunction
-  upsertMessage?: UpsertMessageFunction
+export function getChatGPTClient(opts: ChatGPTAPIOptions & {
+  proxy?: {
+    host?: string
+    port?: string | number
+  }
 }) {
+  if (opts.proxy?.host && opts.proxy?.port) {
+    opts.fetch = ((url: any, options = {}) => {
+      const defaultOptions = {
+        agent: proxy({
+          host: opts.proxy?.host,
+          port: opts.proxy?.port
+        })
+      }
+
+      return nodeFetch(url, {
+        ...defaultOptions,
+        ...options
+      })
+    }) as any
+  }
   return new ChatGPTAPI(opts)
 }
 
