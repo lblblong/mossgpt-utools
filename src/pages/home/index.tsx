@@ -1,19 +1,44 @@
 import { Button } from 'antd'
+import clsx from 'clsx'
+import { useRef } from 'react'
 import emptyImage from '../../assets/images/undraw_Online_messaging_re_qft3.png'
 import { Chat } from '../../components/chat'
 import { withObserver } from '../../shared/func/withObserver'
+import { appStore } from '../../stores/app'
 import { Conversations } from './components/conversations'
 import { InputArea } from './components/inputArea'
 import styles from './index.module.scss'
 import { homeStore } from './store'
 
 export function Page() {
+  const downingRef = useRef<boolean>(false)
+  const lastEventRef = useRef<MouseEvent>()
+
+  const onMove = (event: MouseEvent) => {
+    if (!downingRef.current) return
+    homeStore.inputAreaHeight += lastEventRef.current!.y - event.y
+    lastEventRef.current = event
+  }
+
+  const onMouseDown = (event: MouseEvent) => {
+    lastEventRef.current = event
+    downingRef.current = true
+  }
+
+  const onMouseUp = (event: MouseEvent) => {
+    downingRef.current = false
+  }
+
   return withObserver(() => (
-    <div className={styles.index}>
+    <div className={clsx(styles.index, appStore.isDark && styles.dark)}>
       <div className={styles.conversations}>
         <Conversations />
       </div>
-      <div className={styles.main}>
+      <div
+        className={styles.main}
+        onMouseMove={(e) => onMove(e.nativeEvent)}
+        onMouseUp={(e) => onMouseUp(e.nativeEvent)}
+      >
         {homeStore.conversation ? (
           <>
             <div className={styles.top}>
@@ -32,8 +57,17 @@ export function Page() {
                 onRetry={homeStore.conversation.resendMessage}
               />
             </div>
-            <div className={styles.bottom}>
+            <div
+              className={styles.bottom}
+              style={{
+                height: homeStore.inputAreaHeight,
+              }}
+            >
               <InputArea />
+              <div
+                onMouseDown={(e) => onMouseDown(e.nativeEvent)}
+                className={styles.dragLine}
+              ></div>
             </div>
           </>
         ) : (
