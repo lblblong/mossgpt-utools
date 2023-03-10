@@ -1,4 +1,4 @@
-import { LoadingOutlined, SyncOutlined } from '@ant-design/icons'
+import { CopyOutlined, LoadingOutlined, SyncOutlined } from '@ant-design/icons'
 import { Space, Spin } from 'antd'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
@@ -10,6 +10,7 @@ import { Message } from '../../models/message'
 import { withObserver } from '../../shared/func/withObserver'
 import { appStore } from '../../stores/app'
 import styles from './index.module.scss'
+import { copyToClipboard } from '../../shared/func/copyToClipboard'
 
 type ChatMessage = Pick<
   Message,
@@ -87,8 +88,7 @@ export const Chat: FC<ChatProps> = (props) => {
                       code({ node, inline, className, children, ...props }) {
                         const match =
                           /language-(\w+)/.exec(className || '') || []
-                        return (
-                          !inline && match ? (
+                        return !inline && match ? (
                           <div className={styles.codeBox}>
                             <SyntaxHighlighter
                               children={String(children).replace(/\n$/, '')}
@@ -98,12 +98,17 @@ export const Chat: FC<ChatProps> = (props) => {
                               PreTag="div"
                               {...props}
                             />
+                            <div
+                              className={styles.copyBtn}
+                              onClick={() => copyToClipboard(String(children))}
+                            >
+                              <CopyOutlined />
+                            </div>
                           </div>
-                          ) : (
-                            <code className={className} {...props}>
-                              {children}
-                            </code>
-                          )
+                        ) : (
+                          <code className={className} {...props}>
+                            {children}
+                          </code>
                         )
                       },
                     }}

@@ -5,6 +5,26 @@
   overflow-x: hidden;
   overflow-y: auto;
   .codeBox {
+    position: relative;
+    .copyBtn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 8px;
+      border: 1px solid rgba($color: #fff, $alpha: 0.33);
+      background: rgba($color: #fff, $alpha: 0.18);
+      color: rgba($color: #fff, $alpha: 0.66);
+      opacity: 0;
+      line-height: 1;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    &:hover {
+      .copyBtn {
+        opacity: 1;
+      }
+    }
   }
   .item {
     padding: 8px;
