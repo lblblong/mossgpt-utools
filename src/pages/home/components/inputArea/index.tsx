@@ -5,6 +5,8 @@ import styles from './index.module.scss'
 
 export const InputArea = () => {
   const [value, setValue] = useState('')
+  const [isCompositionStarted, setIsCompositionStarted] = useState(false)
+
   const onSubmit = () => {
     try {
       homeStore.conversation?.check()
@@ -23,7 +25,13 @@ export const InputArea = () => {
         onChange={({ target }) => {
           setValue(target.value)
         }}
+        onCompositionStart={() => {
+          setIsCompositionStarted(true)
+        }}
         onKeyDown={(event) => {
+          if (isCompositionStarted) {
+            return
+          }
           if (event.key === 'Enter') {
             if (event.ctrlKey || event.shiftKey) {
               setValue((value) => value + '\n')
@@ -32,6 +40,9 @@ export const InputArea = () => {
               onSubmit()
             }
           }
+        }}
+        onCompositionEnd={() => {
+          setIsCompositionStarted(false)
         }}
       />
       <div className={styles.submitWrap}>
