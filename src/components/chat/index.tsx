@@ -93,7 +93,12 @@ export const Chat: FC<ChatProps> = (props) => {
                             <SyntaxHighlighter
                               children={String(children).replace(/\n$/, '')}
                               style={theme as any}
-                              customStyle={{ borderRadius: 8 }}
+                              customStyle={{
+                                borderRadius: 8,
+                                background: appStore.isDark
+                                  ? '#000000'
+                                  : undefined,
+                              }}
                               language={match[1] || 'javascript'}
                               PreTag="div"
                               {...props}
@@ -108,9 +113,12 @@ export const Chat: FC<ChatProps> = (props) => {
                             </div>
                           </div>
                         ) : (
-                          <code className={clsx(className, styles.inlineCode)} {...props}>
+                          <span
+                            className={clsx(className, styles.inlineCode)}
+                            {...props}
+                          >
                             {children}
-                          </code>
+                          </span>
                         )
                       },
                     }}
