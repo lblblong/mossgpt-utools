@@ -20,7 +20,7 @@ export const InputArea = () => {
           }
           if (event.key === 'Enter') {
             if (event.ctrlKey || event.shiftKey) {
-              store.value += '\n'
+              return
             } else {
               event.preventDefault()
               store.onSubmit()
