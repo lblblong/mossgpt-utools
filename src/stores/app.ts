@@ -23,12 +23,14 @@ export const appStore = new (class {
     )
   }
 
-  toggleTheme = () => {
-    this.setTheme(this.theme === 'dark' ? 'light' : 'dark')
-    Storage.setTheme(this.theme)
-  }
+  setTheme = (theme: 'light' | 'dark' | 'auto') => {
+    if (theme === 'auto') {
+      Storage.removeTheme()
+      theme = utools.isDarkColors() ? 'dark' : 'light'
+    } else {
+      Storage.setTheme(theme)
+    }
 
-  setTheme = (theme: 'light' | 'dark') => {
     this.theme = theme
     if (theme === 'dark') {
       document.body.classList.add('dartTheme')

@@ -1,4 +1,7 @@
 import { withStore } from '@libeilong/react-store-provider'
+import clsx from 'clsx'
+import { withObserver } from '../../shared/func/withObserver'
+import { appStore } from '../../stores/app'
 import { BasicSetting } from './basic'
 import styles from './index.module.scss'
 import { OtherSetting } from './other'
@@ -6,8 +9,8 @@ import { ProxySetting } from './proxy'
 import { Store } from './store'
 
 function _Page() {
-  return (
-    <div className={styles.index}>
+  return withObserver(() => (
+    <div className={clsx(styles.index, appStore.isDark && styles.dark)}>
       <h2>设置</h2>
       <div className={styles.title}>基本配置</div>
       <div className={styles.box}>
@@ -24,7 +27,7 @@ function _Page() {
         <OtherSetting />
       </div>
     </div>
-  )
+  ))
 }
 
 export const Page = withStore(_Page, Store)

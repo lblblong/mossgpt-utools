@@ -6,7 +6,7 @@
   --base-color: #fff;
 
   /* 灰度 */
-  --gray-0: rgba(0, 0, 0, 0.04);
+  --gray-0: rgba(0, 0, 0, 0.06);
   --gray-1: rgba(0, 0, 0, 0.15);
   --gray-2: rgba(0, 0, 0, 0.25);
   --gray-3: rgba(0, 0, 0, 0.35);
@@ -27,7 +27,7 @@
   --color-primary: #177ddc;
   --base-color: #000;
 
-  --gray-0: rgba(255, 255, 255, 0.04);
+  --gray-0: rgba(255, 255, 255, 0.1);
   --gray-1: rgba(255, 255, 255, 0.15);
   --gray-2: rgba(255, 255, 255, 0.25);
   --gray-3: rgba(255, 255, 255, 0.35);

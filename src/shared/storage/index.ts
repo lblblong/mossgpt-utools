@@ -132,5 +132,9 @@ export class Storage {
     if (theme) return theme
     else return utools.isDarkColors() ? 'dark' : 'light'
   }
+
+  static removeTheme() {
+    utools.dbStorage.removeItem('theme')
+  }
 }
 
