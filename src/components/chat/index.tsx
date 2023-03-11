@@ -1,5 +1,5 @@
 import { CopyOutlined, LoadingOutlined, SyncOutlined } from '@ant-design/icons'
-import { Space, Spin } from 'antd'
+import { Spin } from 'antd'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
 import { FC, useLayoutEffect, useRef } from 'react'
@@ -7,10 +7,10 @@ import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus as theme } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { Message } from '../../models/message'
+import { copyToClipboard } from '../../shared/func/copyToClipboard'
 import { withObserver } from '../../shared/func/withObserver'
 import { appStore } from '../../stores/app'
 import styles from './index.module.scss'
-import { copyToClipboard } from '../../shared/func/copyToClipboard'
 
 type ChatMessage = Pick<
   Message,
@@ -23,29 +23,48 @@ interface ChatProps {
 }
 
 export const Chat: FC<ChatProps> = (props) => {
-  const firstRef = useRef(true)
   const { messages, onRetry } = props
+  const recordRef = useRef({
+    first: true,
+    lastMessageLength: messages.length,
+    lastScrollHeight: 0,
+  })
 
   useLayoutEffect(() => {
-    if (firstRef.current) {
-      const wrapEl = document.getElementById('chat-wrap')
-      wrapEl!.scrollTop = wrapEl!.scrollHeight
+    const container = document.getElementById('chat-container')!
+    const record = recordRef.current
+
+    if (record.first) {
+      container.scrollTop = container.scrollHeight
+      record.first = false
     } else {
-      // document
-      //   .getElementById(messages[messages.length - 1].id)
-      //   ?.scrollIntoView({
-      //     behavior: firstRef.current ? 'auto' : 'smooth',
-      //   })
-      document.getElementById('last-message')?.scrollIntoView({
-        behavior: firstRef.current ? 'auto' : 'smooth',
-      })
+      if (record.lastMessageLength < messages.length) {
+        record.lastMessageLength = messages.length
+        container.scrollTo({
+          top: container.scrollHeight,
+          behavior: 'smooth',
+        })
+      } else {
+        if (record.lastScrollHeight === container.scrollHeight) return
+        record.lastScrollHeight = container.scrollHeight
+        if (
+          container.scrollHeight -
+            container.offsetHeight -
+            container.scrollTop <
+          80
+        ) {
+          container.scrollTo({
+            top: container.scrollHeight,
+            behavior: 'smooth',
+          })
+        }
+      }
     }
-    firstRef.current = false
   }, [messages])
 
   return withObserver(() => (
     <div
-      id="chat-wrap"
+      id="chat-container"
       className={clsx(styles.index, appStore.isDark && styles.dark)}
     >
       {messages.map((message) => {
@@ -60,6 +79,7 @@ export const Chat: FC<ChatProps> = (props) => {
         )
         return (
           <div
+            key={message.id}
             className={clsx(
               styles.item,
               message.self ? styles.user : styles.chatgpt
@@ -155,7 +175,6 @@ export const Chat: FC<ChatProps> = (props) => {
           </div>
         )
       })}
-      <div id="last-message"></div>
     </div>
   ))
 }
