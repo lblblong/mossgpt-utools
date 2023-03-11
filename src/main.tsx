@@ -22,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <ConfigProvider
         theme={{
           token: {
+            marginLG: 16,
             colorPrimary: '#1890ff',
           },
           algorithm:
