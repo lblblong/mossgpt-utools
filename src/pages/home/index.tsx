@@ -1,34 +1,36 @@
 import { Button } from 'antd'
 import clsx from 'clsx'
-import { useRef } from 'react'
+import { useCallback, useRef } from 'react'
 import emptyImage from '../../assets/images/undraw_Online_messaging_re_qft3.png'
 import { Chat } from '../../components/chat'
 import { withObserver } from '../../shared/func/withObserver'
 import { appStore } from '../../stores/app'
 import { Conversations } from './components/conversations'
 import { InputArea } from './components/inputArea'
+import { RecommendTopic } from './components/recommendTopic'
 import styles from './index.module.scss'
 import { homeStore } from './store'
-import { RecommendTopic } from './components/recommendTopic'
 
 export function Page() {
   const downingRef = useRef<boolean>(false)
   const lastEventRef = useRef<MouseEvent>()
 
-  const onMove = (event: MouseEvent) => {
+  const onMove = useCallback((event: MouseEvent) => {
     if (!downingRef.current) return
     homeStore.inputAreaHeight += lastEventRef.current!.y - event.y
     lastEventRef.current = event
-  }
+  }, [])
 
-  const onMouseDown = (event: MouseEvent) => {
+  const onMouseDown = useCallback((event: MouseEvent) => {
     lastEventRef.current = event
+    document.body.classList.add('unselectable')
     downingRef.current = true
-  }
+  }, [])
 
-  const onMouseUp = (event: MouseEvent) => {
+  const onMouseUp = useCallback((event: MouseEvent) => {
+    document.body.classList.remove('unselectable')
     downingRef.current = false
-  }
+  }, [])
 
   return withObserver(() => (
     <div className={clsx(styles.index, appStore.isDark && styles.dark)}>
