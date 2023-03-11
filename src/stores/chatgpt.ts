@@ -42,6 +42,12 @@ export const chatgptStore = new (class {
     content: string,
     onProgress: (opts: { text: string }) => void
   ) => {
+    const autoTitle = Storage.getAotuTitle()
+    if (!autoTitle) {
+      onProgress({ text: content.slice(0, 12) })
+      return
+    }
+
     await this.sendMessage(
       `我想让你为我写的内容起一个12个字以内的简短标题，你只需要返回标题文字，不要包含其他信息，比如内容是：“买手机看什么参数”。则你可以回复：“购机攻略”。请为这段内容起一个标题：“${content}”`,
       {

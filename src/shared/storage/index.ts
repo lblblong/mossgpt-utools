@@ -3,6 +3,7 @@ import { Conversation } from '../../models/conversation'
 import { Message } from '../../models/message'
 import { Template } from '../../models/template'
 import { IConfig } from '../../types'
+import { isNil } from '../func/isNil'
 
 export class Storage {
   static getApiKey() {
@@ -135,6 +136,16 @@ export class Storage {
 
   static removeTheme() {
     utools.dbStorage.removeItem('theme')
+  }
+
+  static setAotuTitle(value: boolean) {
+    utools.dbStorage.setItem('autoTitle', value)
+  }
+
+  static getAotuTitle() {
+    const value = utools.dbStorage.getItem('autoTitle')
+    if (isNil(value)) return true
+    return value
   }
 }
 

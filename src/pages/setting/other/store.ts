@@ -1,5 +1,6 @@
 import { Modal } from 'antd'
 import { makeAutoObservable } from 'mobx'
+import { Storage } from '../../../shared/storage'
 import { chatStore } from '../../../stores/chat'
 import { homeStore } from '../../home/store'
 
@@ -13,15 +14,24 @@ export class Store {
       convs,
       msgs,
     }
+
+    this.autoTitle = Storage.getAotuTitle()
+  }
+
+  autoTitle: boolean
+
+  setAutoTitle = (value: boolean) => {
+    this.autoTitle = value
+    Storage.setAotuTitle(value)
   }
 
   storage: {
     convs: string[]
     msgs: string[]
   } = {
-      convs: [],
-      msgs: [],
-    }
+    convs: [],
+    msgs: [],
+  }
 
   clearStorage = async () => {
     const ids = [...this.storage.convs, ...this.storage.msgs]

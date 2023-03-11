@@ -1,9 +1,8 @@
 import { DeleteOutlined } from '@ant-design/icons'
 import { useStore } from '@libeilong/react-store-provider'
-import { Button, Form, Space, Tooltip } from 'antd'
+import { Button, Form, Radio, Space, Tooltip } from 'antd'
 import { Icon } from '../../../components/icon'
 import { withObserver } from '../../../shared/func/withObserver'
-import { Storage } from '../../../shared/storage'
 import { appStore } from '../../../stores/app'
 import { Store } from '../store'
 import styles from './index.module.scss'
@@ -49,6 +48,19 @@ export function OtherSetting() {
         >
           清除缓存
         </Button>
+      </Form.Item>
+
+      <Form.Item
+        label="自动起会话标题"
+        tooltip="开启此项将会产生对话以外的 Token 消耗"
+      >
+        <Radio.Group
+          value={store.autoTitle}
+          onChange={({ target }) => store.setAutoTitle(target.value)}
+        >
+          <Radio value={true}>开启</Radio>
+          <Radio value={false}>关闭</Radio>
+        </Radio.Group>
       </Form.Item>
     </Form>
   ))
