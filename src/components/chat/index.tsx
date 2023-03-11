@@ -46,12 +46,11 @@ export const Chat: FC<ChatProps> = (props) => {
         })
       } else {
         if (record.lastScrollHeight === container.scrollHeight) return
-        record.lastScrollHeight = container.scrollHeight
         if (
           container.scrollHeight -
             container.offsetHeight -
             container.scrollTop <
-          80
+          120
         ) {
           container.scrollTo({
             top: container.scrollHeight,
@@ -60,6 +59,7 @@ export const Chat: FC<ChatProps> = (props) => {
         }
       }
     }
+    record.lastScrollHeight = container.scrollHeight
   }, [messages])
 
   return withObserver(() => (
