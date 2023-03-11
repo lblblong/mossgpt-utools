@@ -12,10 +12,9 @@ export class Store {
 
   onSubmit = () => {
     try {
-      this.value = this.value.trim()
-      if (this.value === '') return
+      if (this.value.trim() === '') return
       homeStore.conversation?.check()
-      homeStore.conversation?.sendMessage(this.value)
+      homeStore.conversation?.sendMessage(this.value.trim())
       this.value = ''
     } catch (err: any) {
       message.info(err.message)
