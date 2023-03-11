@@ -1,0 +1,52 @@
+.index {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+  padding: 24px 32px;
+  .header {
+    font-size: 18px;
+  }
+
+  .form {
+    padding: 12px 0;
+    > * + * {
+      margin-top: 8px;
+    }
+    .content {
+      font-size: 13px;
+      color: #999;
+      line-height: 1.5;
+    }
+  }
+
+  .topics {
+    padding: 12px 0;
+    margin: -8px;
+    .item {
+      padding: 8px;
+      line-height: 1.6;
+      cursor: pointer;
+      .title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+      }
+      .template {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        font-size: 12px;
+        color: #999;
+      }
+      &:hover {
+        background: rgba($color: #000, $alpha: 0.06);
+      }
+    }
+  }
+}
+

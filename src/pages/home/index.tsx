@@ -9,6 +9,7 @@ import { Conversations } from './components/conversations'
 import { InputArea } from './components/inputArea'
 import styles from './index.module.scss'
 import { homeStore } from './store'
+import { RecommendTopic } from './components/recommendTopic'
 
 export function Page() {
   const downingRef = useRef<boolean>(false)
@@ -56,6 +57,11 @@ export function Page() {
                 })}
                 onRetry={homeStore.conversation.resendMessage}
               />
+              {homeStore.conversation.messages.length === 0 && (
+                <div className={styles.recommendTopic}>
+                  <RecommendTopic />
+                </div>
+              )}
             </div>
             <div
               className={styles.bottom}

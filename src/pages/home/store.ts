@@ -5,10 +5,12 @@ import { Conversation } from '../../models/conversation'
 import { chatStore } from '../../stores/chat'
 import { toTranslation } from '../translation/route'
 import { Store as InputStore } from './components/inputArea/store'
+import { Store as RecommendTopicStore } from './components/recommendTopic/store'
 
 export const homeStore = new (class {
   stores = {
     input: new InputStore(),
+    recommendTopic: new RecommendTopicStore(),
   }
 
   constructor() {
