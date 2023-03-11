@@ -26,7 +26,7 @@ export const InputArea = () => {
               const selectionEnd = event.currentTarget.selectionEnd
               const value = store.value
               store.value = value.slice(0, selectionStart) + '\n' + value.slice(selectionEnd)
-              event.currentTarget.setSelectionRange(selectionStart + 1, selectionEnd + 1)
+              event.currentTarget.setSelectionRange(selectionStart + 1, selectionStart + 1)
             } else {
               event.preventDefault()
               store.onSubmit()
