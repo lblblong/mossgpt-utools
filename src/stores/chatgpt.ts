@@ -42,17 +42,18 @@ export const chatgptStore = new (class {
     content: string,
     onProgress: (opts: { text: string }) => void
   ) => {
-    await this.sendMessage(content, {
-      systemMessage:
-        '请为发给你的内容起一个12个字以内的简短标题，只需要返回标题文字即可。比如内容是：买手机看什么参数。则你可以回复：购机攻略',
-      onProgress: ({ text }) => {
-        text = text.trim()
-        if (!text) return
-        onProgress({
-          text: text.replace(/['"”“《》]/g, '') || content.slice(0, 10),
-        })
-      },
-    })
+    await this.sendMessage(
+      `我想让你为我写的内容起一个12个字以内的简短标题，你只需要返回标题文字，不要包含其他信息，比如内容是：“买手机看什么参数”。则你可以回复：“购机攻略”。请为这段内容起一个标题：“${content}”`,
+      {
+        onProgress: ({ text }) => {
+          text = text.trim()
+          if (!text) return
+          onProgress({
+            text: text.replace(/['"”“《》]/g, '') || content.slice(0, 10),
+          })
+        },
+      }
+    )
   }
 
   destory = () => {
