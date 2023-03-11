@@ -7,7 +7,7 @@ export function ProxySetting() {
   const store = useStore<Store>()
 
   return withObserver(() => (
-    <Form>
+    <Form layout="vertical">
       <Form.Item label="状态">
         <Radio.Group
           value={store.baseConfig.proxy?.open}
@@ -19,38 +19,38 @@ export function ProxySetting() {
           <Radio value={false}>关闭</Radio>
         </Radio.Group>
       </Form.Item>
-      <Form.Item label="IP & 端口">
-        <Input.Group compact>
-          <Form.Item
-            style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
-          >
-            <Input
-              disabled={!store.baseConfig.proxy?.open}
-              placeholder="IP 地址"
-              value={store.baseConfig.proxy?.host}
-              onChange={({ target }) =>
-                (store.baseConfig.proxy!.host = target.value)
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            style={{
-              display: 'inline-block',
-              width: 'calc(50% - 8px)',
-              margin: '0 8px',
-            }}
-          >
-            <Input
-              disabled={!store.baseConfig.proxy?.open}
-              placeholder="端口"
-              value={store.baseConfig.proxy?.port}
-              onChange={({ target }) =>
-                (store.baseConfig.proxy!.port = target.value)
-              }
-            />
-          </Form.Item>
-        </Input.Group>
-      </Form.Item>
+      <Input.Group compact>
+        <Form.Item
+          label="代理 IP 地址"
+          style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+        >
+          <Input
+            disabled={!store.baseConfig.proxy?.open}
+            placeholder="请输入代理 IP 地址"
+            value={store.baseConfig.proxy?.host}
+            onChange={({ target }) =>
+              (store.baseConfig.proxy!.host = target.value)
+            }
+          />
+        </Form.Item>
+        <Form.Item
+          label="端口"
+          style={{
+            display: 'inline-block',
+            width: 'calc(50% - 8px)',
+            margin: '0 8px',
+          }}
+        >
+          <Input
+            disabled={!store.baseConfig.proxy?.open}
+            placeholder="请输入端口"
+            value={store.baseConfig.proxy?.port}
+            onChange={({ target }) =>
+              (store.baseConfig.proxy!.port = target.value)
+            }
+          />
+        </Form.Item>
+      </Input.Group>
       <Form.Item>
         <Button type="primary" onClick={store.saveBaseConfig}>
           保存
