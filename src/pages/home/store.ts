@@ -3,7 +3,6 @@ import { openInput } from '../../components/popups/input'
 import { openTemplatePopup } from '../../components/popups/template'
 import { Conversation } from '../../models/conversation'
 import { chatStore } from '../../stores/chat'
-import { toTranslation } from '../translation/route'
 import { Store as InputStore } from './components/inputArea/store'
 import { Store as RecommendTopicStore } from './components/recommendTopic/store'
 
@@ -15,15 +14,6 @@ export const homeStore = new (class {
 
   constructor() {
     makeAutoObservable(this)
-
-    utools.onPluginEnter(({ code, payload }) => {
-      if (code === 'text') {
-        this.createConversation()
-        this.conversation?.sendMessage(payload)
-      } else if (code === 'translation') {
-        toTranslation({ query: { text: payload } })
-      }
-    })
   }
 
   inputAreaHeight = 108

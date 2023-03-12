@@ -1,19 +1,29 @@
 import { Button } from 'antd'
 import clsx from 'clsx'
-import { useCallback, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import emptyImage from '../../assets/images/undraw_Online_messaging_re_qft3.png'
 import { Chat } from '../../components/chat'
 import { withObserver } from '../../shared/func/withObserver'
+import { useQuery } from '../../shared/hooks/useQuery'
 import { appStore } from '../../stores/app'
 import { Conversations } from './components/conversations'
 import { InputArea } from './components/inputArea'
 import { RecommendTopic } from './components/recommendTopic'
 import styles from './index.module.scss'
+import { IQuery } from './route'
 import { homeStore } from './store'
 
 export function Page() {
   const downingRef = useRef<boolean>(false)
   const lastEventRef = useRef<MouseEvent>()
+  const query = useQuery<IQuery>()
+
+  useEffect(() => {
+    if (query.text) {
+      homeStore.createConversation()
+      homeStore.conversation?.sendMessage(query.text)
+    }
+  }, [query])
 
   const onMove = useCallback((event: MouseEvent) => {
     if (!downingRef.current) return

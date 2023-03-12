@@ -1,6 +1,5 @@
 import { Page } from '.'
-import { Options, navigate } from '../../router'
-import { translationStore } from './store'
+import { navigate, Options } from '../../router'
 
 export type IQuery = {
   text?: string
@@ -12,9 +11,6 @@ export const translationRoute = {
 }
 
 export function toTranslation(opts?: Options<IQuery>) {
-  if (opts?.query?.text) {
-    translationStore.onSourceChange(opts.query.text)
-  }
-  navigate('/translation')
+  navigate('/translation', opts)
 }
 

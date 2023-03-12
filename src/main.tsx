@@ -9,10 +9,12 @@ import './assets/css/index.scss'
 import './assets/css/var.css'
 import { router } from './router'
 import { popupManager } from './shared/popupManager'
+import { registerHooks } from './shared/registerHooks'
 import { update } from './shared/update'
 import { appStore } from './stores/app'
 
 update()
+registerHooks()
 
 configure({ enforceActions: 'never' })
 
