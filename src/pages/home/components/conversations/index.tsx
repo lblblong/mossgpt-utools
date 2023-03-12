@@ -29,6 +29,7 @@ export const Conversations = () => {
         {chatStore.conversations.map((it) => {
           return (
             <div
+              key={it.id}
               className={clsx(
                 styles.item,
                 it === homeStore.conversation && styles.active
