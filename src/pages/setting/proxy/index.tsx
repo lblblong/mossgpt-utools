@@ -28,9 +28,10 @@ export function ProxySetting() {
             disabled={!store.baseConfig.proxy?.open}
             placeholder="请输入代理 IP 地址"
             value={store.baseConfig.proxy?.host}
-            onChange={({ target }) =>
-              (store.baseConfig.proxy!.host = target.value)
-            }
+            onChange={({ target }) => {
+              store.baseConfig.proxy!.host = target.value.split(':')[0]
+              store.baseConfig.proxy!.port = target.value.split(':')[1]
+            }}
           />
         </Form.Item>
         <Form.Item
