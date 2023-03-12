@@ -62,7 +62,7 @@ export class Conversation {
       await chatgptStore.sendMessage(userMessage.text, {
         parentMessageId: userMessage.parentMessageId,
         messageId: userMessage.id,
-        systemMessage: prompt,
+        systemMessage: prompt.trim() !== '' ? prompt.trim() : undefined,
         onProgress: ({ text }) => {
           text = text.trim()
           if (!text) return
