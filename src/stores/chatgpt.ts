@@ -1,6 +1,5 @@
 import { ChatGPTAPI, SendMessageOptions } from '@libeilong/chatgpt'
 import { makeAutoObservable } from 'mobx'
-import { getChatGPTClient } from '../preload'
 import { Storage } from '../shared/storage'
 
 export const chatgptStore = new (class {
@@ -18,13 +17,13 @@ export const chatgptStore = new (class {
     const apiKey = Storage.getApiKey()
     const config = Storage.getConfig()
 
-    this.client = getChatGPTClient({
+    this.client = window.preload.getChatGPTClient({
       apiKey,
       completionParams: {
         model: config.model,
       },
       proxy: config.proxy?.open ? config.proxy : undefined,
-      getMessageById: async (id) => Storage.getMessage(id),
+      getMessageById: async (id: string) => Storage.getMessage(id),
     })
   }
 

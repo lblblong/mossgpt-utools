@@ -1,40 +1,43 @@
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import react from '@vitejs/plugin-react-swc'
+import copy from 'rollup-plugin-copy'
 import { defineConfig } from 'vite'
-import utools from 'vite-plugin-utools'
+import { viteDelDev } from './vite.del-dev'
+import { vitePluginPreload } from './vite.preload'
 
-export default defineConfig({
-  resolve: {
-    alias: [
-      {
-        find: /^~/,
-        replacement: '',
-      },
-    ],
-  },
-  css: {
-    preprocessorOptions: {
-      less: {
-        javascriptEnabled: true,
-        modifyVars: {
-          // ant design 4.17 版本会有 less 报错，添加这个处理，之后版本看是否需要移除该项
-          // 相关链接：https://githubmemory.com/repo/ant-design/ant-design-pro/issues/9082
-          'root-entry-name': 'default',
+export default defineConfig(({ command }) => {
+  const prePlugins =
+    command === 'serve'
+      ? [
+          copy({
+            hook: 'buildStart',
+            verbose: false,
+            targets: [
+              {
+                src: 'public/*',
+                dest: 'dist',
+              },
+            ],
+          }),
+        ]
+      : [viteDelDev()]
+  return {
+    base: './',
+    resolve: {
+      alias: [
+        {
+          find: /^~/,
+          replacement: '',
         },
-      },
+      ],
     },
-  },
-  plugins: [
-    react(),
-    utools({
-      external: 'uTools',
-      preload: {
-        path: './src/preload.ts',
-        watch: true,
-        name: 'window.preload',
-      },
-      buildUpx: false,
-    }),
-  ],
+    plugins: [
+      ...prePlugins,
+      vitePluginPreload(
+        './src/preload.ts',
+        command === 'serve' ? 'buildStart' : 'writeBundle'
+      ),
+      react(),
+    ],
+  }
 })
 

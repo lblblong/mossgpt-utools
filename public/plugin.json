@@ -8,6 +8,7 @@
   "homepage": "https://github.com/lblblong",
   "version": "0.0.2",
   "platform": ["win32", "darwin", "linux"],
+  "development": { "main": "http://127.0.0.1:5173" },
   "features": [
     {
       "code": "moss",
