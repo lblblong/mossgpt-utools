@@ -5,7 +5,7 @@ export const Models = ['gpt-3.5-turbo-0301', 'gpt-3.5-turbo']
 export const DefaultConfig: IConfig = {
   model: Models[0],
   prompt: '',
-  max_tokens: 4096,
+  max_tokens: 4000,
   temperature: undefined,
   top_p: undefined,
   presence_penalty: undefined,
