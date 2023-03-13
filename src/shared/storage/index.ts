@@ -88,7 +88,7 @@ export class Storage {
         id: Date.now() + '' + i,
         title: it.title,
         template: it.template,
-        recommendTopic: it.recommendTopic
+        recommendTopic: it.recommendTopic,
       }))
       for (const it of templates) {
         this.setTemplate(new Template(it))
@@ -107,7 +107,7 @@ export class Storage {
       id: it.id,
       title: it.title,
       template: it.template,
-      recommendTopic: it.recommendTopic
+      recommendTopic: it.recommendTopic,
     })
   }
 

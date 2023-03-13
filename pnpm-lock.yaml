@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@ant-design/icons': ^5.0.1
   '@libeilong/chatgpt': 5.0.8
+  '@libeilong/func': ^0.6.3
   '@libeilong/react-store-provider': ^0.2.3
   '@rollup/plugin-commonjs': ^24.0.1
   '@rollup/plugin-node-resolve': ^15.0.1
@@ -43,6 +44,7 @@ specifiers:
 dependencies:
   '@ant-design/icons': 5.0.1_biqbaboplfbrettd7655fr4n2y
   '@libeilong/chatgpt': registry.npmjs.org/@libeilong/chatgpt/5.0.8
+  '@libeilong/func': 0.6.3
   '@libeilong/react-store-provider': 0.2.3_react@18.2.0
   antd: 5.2.0_biqbaboplfbrettd7655fr4n2y
   clsx: 1.2.1
@@ -382,6 +384,10 @@ packages:
   /@jridgewell/sourcemap-codec/1.4.14:
     resolution: {integrity: sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==}
     dev: true
+
+  /@libeilong/func/0.6.3:
+    resolution: {integrity: sha512-dqpqEzRBPkrUchViTtMssWh+yEwIpiGKp0UKGgEVoXSt8nYNsacBiqCaM457vuTx8GBILX+gtJfNC3XCPW77FA==}
+    dev: false
 
   /@libeilong/react-store-provider/0.2.3_react@18.2.0:
     resolution: {integrity: sha512-5wiWc689MeIwBvXwdRGUmJ5oZhTDZGFLtoD0SJl5Jh/MAgKLaDZtvKGMy4qZS0o8mFL/2ZTbatlHUZ0ZYxRYbg==}

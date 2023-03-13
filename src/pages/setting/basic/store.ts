@@ -11,6 +11,8 @@ export class Store {
     }, 3000)
   }
 
+  restConfig = false
+
   currentLink = 0
 
 }

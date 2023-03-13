@@ -9,7 +9,7 @@ import { Store as OtherStore } from './other/store'
 export class Store {
   stores = {
     basic: new BasicStore(),
-    other: new OtherStore()
+    other: new OtherStore(),
   }
 
   constructor() {
@@ -29,6 +29,11 @@ export class Store {
       model: this.baseConfig.model,
       prompt: this.baseConfig.prompt,
       proxy: toJS(this.baseConfig.proxy),
+      max_tokens: this.baseConfig.max_tokens,
+      temperature: this.baseConfig.temperature,
+      top_p: this.baseConfig.top_p,
+      presence_penalty: this.baseConfig.presence_penalty,
+      frequency_penalty: this.baseConfig.frequency_penalty,
     })
     Storage.setApiKey(this.baseConfig.apiKey)
     chatgptStore.reinit()

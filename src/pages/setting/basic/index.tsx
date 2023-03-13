@@ -1,5 +1,6 @@
+import { ControlOutlined } from '@ant-design/icons'
 import { useStore } from '@libeilong/react-store-provider'
-import { AutoComplete, Button, Form, Input } from 'antd'
+import { AutoComplete, Button, Col, Form, Input, InputNumber, Row } from 'antd'
 import { Models } from '../../../constance'
 import { withObserver } from '../../../shared/func/withObserver'
 import { appStore } from '../../../stores/app'
@@ -43,18 +44,34 @@ export function BasicSetting() {
         />
       </Form.Item>
 
-      <Form.Item label="模型">
-        <AutoComplete
-          value={root.baseConfig.model}
-          options={Models.map((it) => {
-            return {
-              label: it,
-              value: it,
-            }
-          })}
-          onChange={(val) => (root.baseConfig.model = val)}
-        />
-      </Form.Item>
+      <Row gutter={16}>
+        <Col span={12}>
+          <Form.Item label="模型">
+            <AutoComplete
+              value={root.baseConfig.model}
+              options={Models.map((it) => {
+                return {
+                  label: it,
+                  value: it,
+                }
+              })}
+              onChange={(val) => (root.baseConfig.model = val)}
+            />
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item label="Max Tokens">
+            <InputNumber
+              min={1}
+              max={4090}
+              value={root.baseConfig.max_tokens}
+              onChange={(value) => {
+                if (value) root.baseConfig.max_tokens = value
+              }}
+            />
+          </Form.Item>
+        </Col>
+      </Row>
 
       <Form.Item
         label="Prompt"
@@ -66,10 +83,77 @@ export function BasicSetting() {
           onChange={({ target }) => (root.baseConfig.prompt = target.value)}
         />
       </Form.Item>
+
+      {store.restConfig && (
+        <Row gutter={16}>
+          <Col span={5}>
+            <Form.Item label="temperature">
+              <InputNumber
+                min={0}
+                max={2}
+                step={0.1}
+                value={root.baseConfig.temperature}
+                onChange={(value) => {
+                  if (value) root.baseConfig.temperature = value
+                }}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={5}>
+            <Form.Item label="top_p">
+              <InputNumber
+                min={0}
+                max={1}
+                step={0.1}
+                value={root.baseConfig.top_p}
+                onChange={(value) => {
+                  if (value) root.baseConfig.top_p = value
+                }}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={5}>
+            <Form.Item label="presence_penalty">
+              <InputNumber
+                min={-2}
+                max={2}
+                step={0.1}
+                value={root.baseConfig.presence_penalty}
+                onChange={(value) => {
+                  if (value) root.baseConfig.presence_penalty = value
+                }}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={5}>
+            <Form.Item label="frequency_penalty">
+              <InputNumber
+                min={-2}
+                max={2}
+                step={0.1}
+                value={root.baseConfig.frequency_penalty}
+                onChange={(value) => {
+                  if (value) root.baseConfig.frequency_penalty = value
+                }}
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+      )}
+
       <Form.Item>
         <Button type="primary" onClick={root.saveBaseConfig}>
           保存
         </Button>
+        {!store.restConfig && (
+          <Button
+            type="link"
+            icon={<ControlOutlined />}
+            onClick={() => (store.restConfig = true)}
+          >
+            高级配置
+          </Button>
+        )}
       </Form.Item>
     </Form>
   ))

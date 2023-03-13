@@ -10,6 +10,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@libeilong/chatgpt": "5.0.8",
+    "@libeilong/func": "^0.6.3",
     "@libeilong/react-store-provider": "^0.2.3",
     "antd": "^5.2.0",
     "clsx": "^1.2.1",
