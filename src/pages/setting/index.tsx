@@ -1,7 +1,5 @@
 import { withStore } from '@libeilong/react-store-provider'
-import clsx from 'clsx'
 import { withObserver } from '../../shared/func/withObserver'
-import { appStore } from '../../stores/app'
 import { BasicSetting } from './basic'
 import styles from './index.module.scss'
 import { OtherSetting } from './other'
@@ -10,7 +8,7 @@ import { Store } from './store'
 
 function _Page() {
   return withObserver(() => (
-    <div className={clsx(styles.index, appStore.isDark && styles.dark)}>
+    <div className={styles.index}>
       <h2>设置</h2>
       <div className={styles.title}>基本配置</div>
       <div className={styles.box}>

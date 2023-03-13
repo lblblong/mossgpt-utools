@@ -1,10 +1,11 @@
 .index {
   padding: 16px;
-  background: #fff;
   border-radius: 12px;
   min-width: 200px;
-  > * + * {
-    margin-top: 12px;
+  background: #fff;
+
+  .input {
+    margin: 12px 0;
   }
 
   .title {
@@ -25,6 +26,6 @@
 
 .dark {
   background: #000;
-  border: 1px solid var(--gray-3);
+  border: 1px solid var(--gray-2);
 }
 

@@ -3,7 +3,7 @@
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  background: #fff;
+  background: var(--base-color);
 
   .sourceBox,
   .targetBox {
@@ -33,19 +33,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 16px;
-    background: rgba($color: #000000, $alpha: 0.03);
+    background: var(--gray-0);
     margin: 0 12px;
     border-radius: 8px;
     .icon {
       padding: 0 8px;
     }
-  }
-}
-
-.dark {
-  background: #000;
-  .toolbarBox {
-    background: rgba($color: #ffffff, $alpha: 0.06);
   }
 }
 

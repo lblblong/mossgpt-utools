@@ -1,4 +1,8 @@
 .index {
+  --title-color: var(--gray-8);
+  --subt-title-color: var(--gray-7);
+  --hover-background-color: var(--gray-0);
+
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -9,6 +13,8 @@
   padding: 24px 32px;
   .header {
     font-size: 18px;
+    color: var(--title-color);
+    font-weight: bold;
   }
 
   .form {
@@ -32,19 +38,20 @@
       cursor: pointer;
       .title {
         font-size: 14px;
-        font-weight: bold;
-        color: #333;
+        color: var(--subt-title-color);
+        padding-bottom: 2px;
       }
       .template {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         overflow: hidden;
-        font-size: 12px;
+        font-size: 11px;
         color: #999;
       }
       &:hover {
-        background: rgba($color: #000, $alpha: 0.06);
+        background: var(--hover-background-color);
+        border-radius: 8px;
       }
     }
   }

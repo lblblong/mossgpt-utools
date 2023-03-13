@@ -21,6 +21,7 @@ const Input: FC<Props> = ({ title, placeholder, defaultValue }) => {
     <div className={clsx(styles.index, appStore.isDark && styles.dark)}>
       <div>{title}</div>
       <AntInput
+        className={styles.input}
         placeholder={placeholder}
         value={value}
         onChange={({ target }) => setValue(target.value)}

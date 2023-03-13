@@ -1,10 +1,8 @@
 import { ArrowRightOutlined, RetweetOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
-import clsx from 'clsx'
 import { useEffect } from 'react'
 import { withObserver } from '../../shared/func/withObserver'
 import { useQuery } from '../../shared/hooks/useQuery'
-import { appStore } from '../../stores/app'
 import styles from './index.module.scss'
 import { IQuery } from './route'
 import { translationStore } from './store'
@@ -19,7 +17,7 @@ export function Page() {
   }, [query])
 
   return withObserver(() => (
-    <div className={clsx(styles.index, appStore.isDark && styles.dark)}>
+    <div className={styles.index}>
       <div className={styles.sourceBox}>
         <textarea
           value={translationStore.source}
