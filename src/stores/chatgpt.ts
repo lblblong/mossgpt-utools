@@ -19,7 +19,6 @@ export const chatgptStore = new (class {
     const config = Storage.getConfig()
 
     const completionParams = objectPick(config, [
-      'max_tokens',
       'temperature',
       'top_p',
       'presence_penalty',
@@ -32,6 +31,7 @@ export const chatgptStore = new (class {
         model: config.model,
         ...completionParams,
       },
+      maxModelTokens: config.max_tokens,
       proxy: config.proxy?.open ? config.proxy : undefined,
       getMessageById: async (id: string) => Storage.getMessage(id),
     })
