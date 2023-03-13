@@ -46,9 +46,10 @@ const TemplatePopup: FC<Props> = () => {
                   className={styles.item}
                   size="small"
                   hoverable
-                  onClick={() => setValue(it.content)}
+                  title={it.title}
+                  onClick={() => setValue(it.template)}
                 >
-                  {it.content}
+                  {it.template}
                 </Card>
               )
             })}

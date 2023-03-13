@@ -2,11 +2,15 @@ import { makeAutoObservable } from 'mobx';
 
 export class Template {
   id?: string
-  content: string
+  title: string
+  template: string
+  recommendTopic?: boolean
 
-  constructor(opts: { id?: string; content: string }) {
+  constructor(opts: Template) {
     this.id = opts.id
-    this.content = opts.content
+    this.title = opts.title
+    this.template = opts.template
+    this.recommendTopic = opts.recommendTopic
     makeAutoObservable(this)
   }
 }

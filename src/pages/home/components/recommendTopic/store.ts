@@ -1,17 +1,20 @@
 import { message } from 'antd'
 import { makeAutoObservable } from 'mobx'
-import { TopicList } from '../../../../constance'
+import { Template } from '../../../../models/template'
 import { getRandomElements } from '../../../../shared/func/getRandomElements'
+import { Storage } from '../../../../shared/storage'
 import { homeStore } from '../../store'
 
 export class Store {
   constructor() {
+    this.refreshTopics()
+
     makeAutoObservable(this)
   }
 
-  topics = getRandomElements(TopicList, 3)
+  topics: Template[] = []
 
-  currentTopic?: typeof TopicList[0] = undefined
+  currentTopic?: Template = undefined
 
   get text() {
     if (!this.currentTopic) return ''
@@ -34,7 +37,7 @@ export class Store {
 
   values: string[] = []
 
-  setCurrentTopic = (topic?: typeof TopicList[0]) => {
+  setCurrentTopic = (topic?: Template) => {
     this.values = []
     this.currentTopic = topic
   }
@@ -57,7 +60,7 @@ export class Store {
   }
 
   refreshTopics = () => {
-    this.topics = getRandomElements(TopicList, 3)
+    this.topics = getRandomElements(Storage.getTemplates().filter(it => it.recommendTopic), 3)
   }
 }
 

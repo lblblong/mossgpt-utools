@@ -1,5 +1,6 @@
+import { PlusOutlined } from '@ant-design/icons'
 import { useStore, withStore } from '@libeilong/react-store-provider'
-import { Button, Card } from 'antd'
+import { Card, FloatButton, Tag } from 'antd'
 import { withObserver } from '../../shared/func/withObserver'
 import styles from './index.module.scss'
 import { Store } from './store'
@@ -18,16 +19,21 @@ function _Page() {
             size="small"
             hoverable
             onClick={() => store.onEdit(it)}
+            title={it.title}
+            extra={
+              it.recommendTopic ? <Tag color="blue">推荐话题</Tag> : undefined
+            }
           >
-            {it.content}
+            {it.template}
           </Card>
         )
       })}
-      <div className={styles.action}>
-        <Button type="primary" onClick={store.onCreate}>
-          添加模板
-        </Button>
-      </div>
+      <FloatButton
+        tooltip="添加模板"
+        icon={<PlusOutlined />}
+        type="primary"
+        onClick={store.onCreate}
+      ></FloatButton>
     </div>
   ))
 }

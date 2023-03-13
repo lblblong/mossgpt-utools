@@ -1,5 +1,5 @@
 import { Modal, message } from 'antd'
-import { makeAutoObservable, toJS } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import { Template } from '../../models/template'
 import { router } from '../../router'
 import { Storage } from '../../shared/storage'
@@ -13,16 +13,15 @@ export class Store {
   query?: IQuery
 
   onQueryChange = (query: IQuery) => {
-    console.log(query)
     this.query = query
     if (this.query.id) {
       this.template = Storage.getTemplate(this.query.id)
-      console.log('设置template', toJS(this.template))
     }
   }
 
   template = new Template({
-    content: '',
+    title: '',
+    template: '',
   })
 
   onSubmit = () => {

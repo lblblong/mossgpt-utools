@@ -1,4 +1,4 @@
-import { DefaultConfig, DefaultTemplates, dataVersion } from '../../constance'
+import { DefaultConfig, DefaultTemplates } from '../../constance'
 import { Conversation } from '../../models/conversation'
 import { Message } from '../../models/message'
 import { Template } from '../../models/template'
@@ -86,7 +86,9 @@ export class Storage {
     if (templates.length === 0) {
       templates = DefaultTemplates.map((it, i) => ({
         id: Date.now() + '' + i,
-        content: it,
+        title: it.title,
+        template: it.template,
+        recommendTopic: it.recommendTopic
       }))
       for (const it of templates) {
         this.setTemplate(new Template(it))
@@ -103,7 +105,9 @@ export class Storage {
   static setTemplate(it: Template) {
     utools.dbStorage.setItem(`t-${it.id}`, {
       id: it.id,
-      content: it.content,
+      title: it.title,
+      template: it.template,
+      recommendTopic: it.recommendTopic
     })
   }
 
@@ -114,7 +118,6 @@ export class Storage {
   static getLastDataVersion() {
     const lastDataVersion = utools.dbStorage.getItem('dataVersion')
     if (lastDataVersion === null || lastDataVersion === undefined) {
-      this.setLastDataVersion(dataVersion)
       return -1
     }
     return lastDataVersion
