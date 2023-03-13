@@ -1,5 +1,5 @@
 import { CopyOutlined, LoadingOutlined, SyncOutlined } from '@ant-design/icons'
-import { Spin } from 'antd'
+import { message as AntMessage, Spin } from 'antd'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
 import { FC, useLayoutEffect, useRef } from 'react'
@@ -125,9 +125,14 @@ export const Chat: FC<ChatProps> = (props) => {
                             />
                             <div
                               className={styles.copyBtn}
-                              onClick={() =>
-                                copyToClipboard(String(children).trim())
-                              }
+                              onClick={async () => {
+                                try {
+                                  await copyToClipboard(String(children).trim())
+                                  AntMessage.success('复制成功')
+                                } catch (err: any) {
+                                  AntMessage.error(err.message)
+                                }
+                              }}
                             >
                               <CopyOutlined />
                             </div>

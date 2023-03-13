@@ -2,7 +2,8 @@
   padding: 16px;
   border-radius: 12px;
   min-width: 200px;
-  background: #fff;
+  background: var(--base-color);
+  border: 1px solid var(--gray-1);
 
   .input {
     margin: 12px 0;
@@ -22,10 +23,5 @@
       margin-left: 12px;
     }
   }
-}
-
-.dark {
-  background: #000;
-  border: 1px solid var(--gray-2);
 }
 

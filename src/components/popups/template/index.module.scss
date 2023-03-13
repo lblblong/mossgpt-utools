@@ -1,8 +1,10 @@
 .index {
-  background: #fff;
   border-radius: 12px;
   width: 500px;
   height: 400px;
+  background: var(--base-color);
+  border: 1px solid var(--gray-1);
+
   .edit,
   .templates {
     width: 100%;
@@ -33,9 +35,3 @@
     }
   }
 }
-
-.dark {
-  background: #000;
-  border: 1px solid var(--gray-2);
-}
-

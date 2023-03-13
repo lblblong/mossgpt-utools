@@ -1,10 +1,8 @@
-import { Input as AntInput, Button } from 'antd'
-import clsx from 'clsx'
+import { Button, Input as AntInput } from 'antd'
 import { useController } from 'oh-popup-react'
 import { FC, useState } from 'react'
 import { withObserver } from '../../../shared/func/withObserver'
 import { popupManager } from '../../../shared/popupManager'
-import { appStore } from '../../../stores/app'
 import styles from './index.module.scss'
 
 interface Props {
@@ -18,7 +16,7 @@ const Input: FC<Props> = ({ title, placeholder, defaultValue }) => {
   const [value, setValue] = useState(defaultValue || '')
 
   return withObserver(() => (
-    <div className={clsx(styles.index, appStore.isDark && styles.dark)}>
+    <div className={styles.index}>
       <div>{title}</div>
       <AntInput
         className={styles.input}

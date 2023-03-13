@@ -1,12 +1,10 @@
 import { ArrowLeftOutlined } from '@ant-design/icons'
 import { useStore, withStore } from '@libeilong/react-store-provider'
 import { Button, Checkbox, Input, Space } from 'antd'
-import clsx from 'clsx'
 import { useEffect } from 'react'
 import { router } from '../../router'
 import { withObserver } from '../../shared/func/withObserver'
 import { useQuery } from '../../shared/hooks/useQuery'
-import { appStore } from '../../stores/app'
 import styles from './index.module.scss'
 import { IQuery } from './route'
 import { Store } from './store'
@@ -19,7 +17,7 @@ function _Page() {
   }, [query, store])
 
   return withObserver(() => (
-    <div className={clsx(styles.index, appStore.isDark && styles.dark)}>
+    <div className={styles.index}>
       <h2 className={styles.title} onClick={() => router.back()}>
         <ArrowLeftOutlined /> 返回
       </h2>
@@ -31,7 +29,7 @@ function _Page() {
         />
         <Input.TextArea
           placeholder="请输入模板内容"
-          autoSize={{ minRows: 5 }}
+          autoSize={{ minRows: 6 }}
           value={store.template.template}
           onChange={({ target }) => (store.template.template = target.value)}
         />

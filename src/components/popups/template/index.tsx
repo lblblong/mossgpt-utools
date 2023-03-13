@@ -1,12 +1,10 @@
 import { Button, Card, Space } from 'antd'
 import { useController } from 'oh-popup-react'
 import { FC, useMemo, useState } from 'react'
+import { withObserver } from '../../../shared/func/withObserver'
 import { popupManager } from '../../../shared/popupManager'
 import { Storage } from '../../../shared/storage'
 import styles from './index.module.scss'
-import { withObserver } from '../../../shared/func/withObserver'
-import clsx from 'clsx'
-import { appStore } from '../../../stores/app'
 
 interface Props {}
 
@@ -16,7 +14,7 @@ const TemplatePopup: FC<Props> = () => {
   const [value, setValue] = useState<string | undefined>()
 
   return withObserver(() => (
-    <div className={clsx(styles.index, appStore.isDark && styles.dark)}>
+    <div className={styles.index}>
       {value ? (
         <div className={styles.edit}>
           <textarea
