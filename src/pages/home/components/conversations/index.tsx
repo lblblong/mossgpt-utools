@@ -16,11 +16,9 @@ export const Conversations = () => {
     id: 'conversationMenu',
   })
   // 会话列表排序
-  chatStore.conversations.forEach((it) => {
-    it.init()
-  })
   chatStore.conversations.sort((a, b) => {
-    console.log(a.lastMessage, b.lastMessage)
+    a.init()
+    b.init()
     if (a.lastMessage === null) {
       return -1
     } else if (b.lastMessage === null) {
