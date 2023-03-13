@@ -26,7 +26,6 @@ specifiers:
   oh-popup-react: ^0.1.2
   oh-router: ^0.3.0
   oh-router-react: ^0.0.9
-  qrcode.react: ^3.1.0
   qs: ^6.11.0
   react: ^18.2.0
   react-contexify: ^6.0.0
@@ -39,7 +38,6 @@ specifiers:
   tslib: ^2.5.0
   typescript: ^4.6.4
   utools-api-types: ^3.0.0
-  uuid: ^9.0.0
   vite: ^4.1.4
 
 dependencies:
@@ -58,14 +56,12 @@ dependencies:
   oh-popup-react: 0.1.2_pmewdyzpvknpzprbf3ltuyfhga
   oh-router: 0.3.0
   oh-router-react: 0.0.9_wlgeabsufqil7sesckxey654b4
-  qrcode.react: 3.1.0_react@18.2.0
   qs: 6.11.0
   react: 18.2.0
   react-contexify: 6.0.0_biqbaboplfbrettd7655fr4n2y
   react-dom: 18.2.0_react@18.2.0
   react-markdown: 8.0.5_3stiutgnnbnfnf3uowm5cip22i
   react-syntax-highlighter: 15.5.0_react@18.2.0
-  uuid: 9.0.0
 
 devDependencies:
   '@rollup/plugin-commonjs': 24.0.1_rollup@3.19.1
