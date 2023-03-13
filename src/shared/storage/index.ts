@@ -94,6 +94,7 @@ export class Storage {
         this.setTemplate(new Template(it))
       }
     }
+
     return templates.map((it) => new Template(it))
   }
 

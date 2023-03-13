@@ -1,5 +1,5 @@
 import { message } from 'antd'
-import { dataVersion } from '../../constance'
+import { dataVersion, DefaultTemplates } from '../../constance'
 import { Template } from '../../models/template'
 import { Storage } from '../storage'
 
@@ -9,11 +9,21 @@ function updateTemplates(lastDataVersion: number) {
   if (templates.length === 0) return
   for (let i = 0; i < templates.length; i++) {
     const t = templates[i]
-    Storage.setTemplate(new Template({
-      id: t.id,
-      title: '',
-      template: t.content,
-    }))
+    Storage.setTemplate(
+      new Template({
+        id: t.id,
+        title: t.content.slice(0, 12),
+        template: t.content,
+      })
+    )
+  }
+  for (let i = 0; i < DefaultTemplates.length; i++) {
+    Storage.setTemplate(
+      new Template({
+        id: Date.now() + '' + i,
+        ...DefaultTemplates[i],
+      })
+    )
   }
 }
 

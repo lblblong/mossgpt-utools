@@ -1,4 +1,5 @@
 export function getRandomElements<T>(arr: T[], n: number): T[] {
+  if (arr.length <= n) return arr
   const res: T[] = []
   const copy = arr.slice()
   for (let i = 0; i < n; i++) {

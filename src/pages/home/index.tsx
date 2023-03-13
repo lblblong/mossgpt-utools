@@ -69,11 +69,12 @@ export function Page() {
                 })}
                 onRetry={homeStore.conversation.resendMessage}
               />
-              {homeStore.conversation.messages.length === 0 && (
-                <div className={styles.recommendTopic}>
-                  <RecommendTopic />
-                </div>
-              )}
+              {homeStore.conversation.messages.length === 0 &&
+                homeStore.stores.recommendTopic.topics.length > 0 && (
+                  <div className={styles.recommendTopic}>
+                    <RecommendTopic />
+                  </div>
+                )}
             </div>
             <div
               className={styles.bottom}
