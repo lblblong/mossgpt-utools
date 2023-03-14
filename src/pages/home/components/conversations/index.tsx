@@ -26,7 +26,7 @@ export const Conversations = () => {
         <span style={{ paddingLeft: 4 }}>新建会话</span>
       </div>
       <div className={styles.list}>
-        {chatStore.conversations.map((it) => {
+        {chatStore.sortedConversations.map((it) => {
           return (
             <div
               key={it.id}

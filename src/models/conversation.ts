@@ -8,11 +8,13 @@ export class Conversation {
   messages: Message[] = []
   name: string
   createdAt: number
+  updatedAt: number
 
-  constructor(opts?: { id?: string; name?: string; createdAt?: number }) {
+  constructor(opts?: { id?: string; name?: string; createdAt?: number; updatedAt?: number }) {
     this.id = opts?.id || Date.now() + ''
     this.name = opts?.name || '新会话'
     this.createdAt = opts?.createdAt || Date.now()
+    this.updatedAt = opts?.updatedAt || opts?.createdAt || Date.now()
 
     makeAutoObservable(this)
   }
@@ -55,6 +57,8 @@ export class Conversation {
     userMessage: Message,
     chatgptMessage: Message
   ) => {
+    this.updatedAt = Date.now()
+    this.flushDb()
     try {
       this.loading = true
       const { prompt } = Storage.getConfig()

@@ -19,6 +19,7 @@ export class Storage {
       id: it.id,
       name: it.name,
       createdAt: it.createdAt,
+      updatedAt: it.updatedAt
     })
   }
 
@@ -27,9 +28,6 @@ export class Storage {
     return conversations
       .map(({ value }: any) => {
         return new Conversation(value)
-      })
-      .sort((a, b) => {
-        return a.createdAt < b.createdAt ? 1 : -1
       })
   }
 

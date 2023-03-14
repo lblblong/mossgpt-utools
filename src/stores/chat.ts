@@ -17,6 +17,12 @@ export const chatStore = new (class {
 
   conversations: Conversation[] = []
 
+  get sortedConversations() {
+    return [...this.conversations].sort((a, b) => {
+      return a.updatedAt < b.updatedAt ? 1 : -1
+    })
+  }
+
   createConversation = () => {
     const conversation = new Conversation().flushDb()
     this.conversations.unshift(conversation)
