@@ -19,6 +19,10 @@ export function Page() {
   const query = useQuery<IQuery>()
 
   useEffect(() => {
+    homeStore.stores.recommendTopic.refreshTopics()
+  }, [])
+
+  useEffect(() => {
     if (query.text) {
       homeStore.createConversation()
       homeStore.conversation?.sendMessage(query.text)

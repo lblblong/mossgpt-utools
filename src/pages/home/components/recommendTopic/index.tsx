@@ -9,6 +9,7 @@ import { Store } from './store'
 
 const _RecommendTopic = () => {
   const store = homeStore.stores.recommendTopic
+
   return withObserver(() => (
     <div className={styles.index}>
       <div className={styles.header}>

@@ -7,8 +7,6 @@ import { homeStore } from '../../store'
 
 export class Store {
   constructor() {
-    this.refreshTopics()
-
     makeAutoObservable(this)
   }
 

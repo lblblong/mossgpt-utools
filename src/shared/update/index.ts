@@ -9,6 +9,7 @@ function updateTemplates(lastDataVersion: number) {
   if (templates.length === 0) return
   for (let i = 0; i < templates.length; i++) {
     const t = templates[i]
+    if (!t.content || !t.id) continue
     Storage.setTemplate(
       new Template({
         id: t.id,
