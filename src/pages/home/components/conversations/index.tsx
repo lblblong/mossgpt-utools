@@ -15,6 +15,17 @@ export const Conversations = () => {
   const { show } = useContextMenu({
     id: 'conversationMenu',
   })
+  // 会话列表排序
+  chatStore.conversations.sort((a, b) => {
+    a.init()
+    b.init()
+    if (a.lastMessage === null) {
+      return -1
+    } else if (b.lastMessage === null) {
+      return 1
+    }
+    return a.lastMessage?.createdAt > b.lastMessage?.createdAt ? -1 : 1
+  })
 
   return withObserver(() => (
     <div className={styles.index}>
