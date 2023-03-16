@@ -4,6 +4,8 @@ import clsx from 'clsx'
 import dayjs from 'dayjs'
 import { FC, useLayoutEffect, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
+import RemarkMathPlugin from 'remark-math';
+import rehypeKatex from 'rehype-katex'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus as theme } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { Message } from '../../models/message'
@@ -11,6 +13,7 @@ import { copyToClipboard } from '../../shared/func/copyToClipboard'
 import { withObserver } from '../../shared/func/withObserver'
 import { appStore } from '../../stores/app'
 import styles from './index.module.scss'
+import 'katex/dist/katex.min.css'
 
 type ChatMessage = Pick<
   Message,
@@ -48,8 +51,8 @@ export const Chat: FC<ChatProps> = (props) => {
         if (record.lastScrollHeight === container.scrollHeight) return
         if (
           container.scrollHeight -
-            container.offsetHeight -
-            container.scrollTop <
+          container.offsetHeight -
+          container.scrollTop <
           120
         ) {
           container.scrollTo({
@@ -104,6 +107,8 @@ export const Chat: FC<ChatProps> = (props) => {
                   ></div>
                 ) : (
                   <ReactMarkdown
+                    remarkPlugins={[RemarkMathPlugin]}
+                    rehypePlugins={[rehypeKatex]}
                     components={{
                       code({ node, inline, className, children, ...props }) {
                         const match =
