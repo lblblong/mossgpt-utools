@@ -1,4 +1,4 @@
-import { DefaultConfig, DefaultTemplates } from '../../constance'
+import { DefaultConfig, DefaultTemplates, DefaultApiBaseUrl } from '../../constance'
 import { Conversation } from '../../models/conversation'
 import { Message } from '../../models/message'
 import { Template } from '../../models/template'
@@ -6,6 +6,18 @@ import { IConfig } from '../../types'
 import { isNil } from '../func/isNil'
 
 export class Storage {
+  static getApiBaseUrl(): string {
+    const url = utools.dbStorage.getItem('apiBaseUrl')
+    if (isNil(url)) {
+      return DefaultApiBaseUrl
+    }
+    return url
+  }
+
+  static setApiBaseUrl(url: string) {
+    return utools.dbStorage.setItem('apiBaseUrl', url)
+  }
+
   static getApiKey() {
     return utools.dbStorage.getItem('apiKey')
   }

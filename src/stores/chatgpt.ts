@@ -16,6 +16,7 @@ export const chatgptStore = new (class {
     if (this.client) return
 
     const apiKey = Storage.getApiKey()
+    const apiBaseUrl = Storage.getApiBaseUrl()
     const config = Storage.getConfig()
 
     const completionParams = objectPick(config, [
@@ -27,6 +28,7 @@ export const chatgptStore = new (class {
 
     this.client = window.preload.getChatGPTClient({
       apiKey,
+      apiBaseUrl,
       completionParams: {
         model: config.model,
         ...completionParams,

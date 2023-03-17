@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import { ControlOutlined } from '@ant-design/icons'
 import { useStore } from '@libeilong/react-store-provider'
-import { AutoComplete, Button, Col, Form, Input, InputNumber, Row } from 'antd'
+import { AutoComplete, Button, Col, Form, Input, Select, InputNumber, Row } from 'antd'
 import { Models } from '../../../constance'
 import { withObserver } from '../../../shared/func/withObserver'
 import { appStore } from '../../../stores/app'
@@ -9,6 +10,21 @@ import { Store } from '../store'
 export function BasicSetting() {
   const root = useStore<Store>()
   const store = root.stores.basic
+  const { Option } = Select
+  const split_results = root.baseConfig.apiBaseUrl.split('://', 2)
+  const [selectedSchema, setSelectedSchema] = useState(`${split_results[0]}://`)
+  const [apiUrl, setApiUrl] = useState(split_results[1])
+
+  const selectSchema = (
+    <Select
+      defaultValue={selectedSchema}
+      onChange={(val) => {
+        setSelectedSchema(val)
+      }}>
+      <Option value="https://">https://</Option>
+      <Option value="http://">http://</Option>
+    </Select >
+  );
 
   return withObserver(() => (
     <Form layout="vertical">
@@ -41,6 +57,20 @@ export function BasicSetting() {
         <Input.Password
           value={root.baseConfig.apiKey}
           onChange={({ target }) => (root.baseConfig.apiKey = target.value)}
+        />
+      </Form.Item>
+
+      <Form.Item
+        label="API_URL"
+        tooltip="如果你有自己的 ChatGPT 服务，可以在这里填写你的 API_URL。"
+      >
+        <Input
+          value={apiUrl}
+          addonBefore={selectSchema}
+          onChange={({ target }) => (
+            setApiUrl(target.value),
+            root.baseConfig.apiBaseUrl = `${selectedSchema}${target.value}`
+          )}
         />
       </Form.Item>
 

@@ -2,6 +2,8 @@ import { IConfig } from './types'
 
 export const Models = ['gpt-3.5-turbo-0301', 'gpt-3.5-turbo']
 
+export const DefaultApiBaseUrl = 'https://api.openai.com'
+
 export const DefaultConfig: IConfig = {
   model: Models[0],
   prompt: '',
