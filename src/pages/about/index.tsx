@@ -1,4 +1,4 @@
-import { GithubFilled, WechatFilled } from '@ant-design/icons'
+import { GithubFilled, WechatFilled, WindowsOutlined } from '@ant-design/icons'
 import { Button, Divider, Space } from 'antd'
 import { Markdown } from '../../components/markdown'
 import { Introduction } from '../../constance'
@@ -12,6 +12,13 @@ export function Page() {
         <div className={styles.title}>MossGPT</div>
         <div>没有人类的文明，毫无意义 - 《流浪地球》</div>
         <Space>
+          <Button
+            type="primary"
+            icon={<WindowsOutlined />}
+            onClick={stores.app.openDesktopDownload}
+          >
+            下载桌面端
+          </Button>
           <Button
             type="primary"
             icon={<WechatFilled />}

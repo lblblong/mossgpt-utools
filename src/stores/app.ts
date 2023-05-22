@@ -119,6 +119,10 @@ export class AppStore {
     }, 600)
   }
 
+  openDesktopDownload = () => {
+    platform.shellOpenExternal('https://moss.csxq.fun')
+  }
+
   openQrcode = async () => {
     try {
       message.loading('请稍等...')
