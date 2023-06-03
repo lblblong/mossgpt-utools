@@ -1,8 +1,9 @@
+MossGPT 将不再开源并探索商业化的道路，桌面端下载地址：https://mossgpt.fun
+
 # MossGPT
 
-基于 gpt-3.5-turbo 的 utools 插件
 
-2023-05-11 MossGPT 将不再开源并探索商业化的道路，桌面端下载地址：https://moss.csxq.fun
+基于 gpt-3.5-turbo 的 utools 插件
 
 
 [![ppbtaff.png](https://s1.ax1x.com/2023/04/09/ppbtaff.png)](https://imgse.com/i/ppbtaff)
