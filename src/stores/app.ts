@@ -120,7 +120,7 @@ export class AppStore {
   }
 
   openDesktopDownload = () => {
-    platform.shellOpenExternal('https://moss.csxq.fun')
+    platform.shellOpenExternal('https://mossgpt.fun')
   }
 
   openQrcode = async () => {

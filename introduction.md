@@ -1,8 +1,6 @@
 本应用需要自备 `API KEY` 才能使用，请 [点我进入设置页](/setting) 配置 `API KEY`。如没有 `API KEY` ，请 [点我搜索相关教程](https://search.bilibili.com/all?keyword=openai注册) 自行注册获取，这非常简单
 
-本应用是开源项目，如果你喜欢并愿意帮助作者持续维护该项目，可以 [在 Github 给该项目点个 ★Star](https://github.com/lblblong/mossgpt-utools) 或者 [点我赞赏作者一杯咖啡](!qrcodePay)
-
-如果你有功能、Bug 相关的建议、或是想要找到关于 AI 志同道合的好友，请加入我们的交流群 [点我获取交流群二维码](!qrcode)
+Moss 的桌面端已发布，立即下载：[https://mossgpt.fun](https://mossgpt.fun)
 
 **基本使用**
 
@@ -19,11 +17,9 @@
 
 **关于网络**
 
-本应用默认使用了 [justjavac](https://github.com/justjavac) 大佬搭建的免费代理线路，因此，你不需要额外的翻墙也可以使用。如果你觉得代理线路不稳定或不安全，可以 [点我一键搭建自己的免费代理](https://dash.deno.com/new?url=https://raw.githubusercontent.com/justjavac/openai-proxy/main/main.ts)
+本应用默认使用了群友 “盛先生” 提供的免费代理线路，因此，你不需要额外的翻墙也可以使用。如果你觉得代理线路不稳定或不安全，可以 [点我一键搭建自己的免费代理](https://dash.deno.com/new?url=https://raw.githubusercontent.com/justjavac/openai-proxy/main/main.ts)
 
 **关于数据**
 
 本应用所有产生的数据都托管于 uTools 存储，应用本身不会以任何形式窃取使用和传播你的数据
-
-我们会尽量保证你的数据安全，如对此依然不放心，可自行下载源码编译
 

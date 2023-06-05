@@ -2,9 +2,10 @@ import { message } from 'antd'
 import { dataVersion } from '../../constance'
 import { Storage } from '../storage'
 import updateTo3 from './3'
+import updateTo4 from './4'
 
 // 更新不能依赖于其他模块，因为其他模块可能会因为更新而发生变化
-const updates = [updateTo3]
+const updates = [updateTo3, updateTo4]
 
 export function update() {
   try {

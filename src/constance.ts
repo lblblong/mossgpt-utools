@@ -13,7 +13,7 @@ export const Models = [
 
 export const DefaultConfig: IConfig = {
   model: Models[0],
-  apiBaseUrl: 'https://closeai.deno.dev/v1',
+  apiBaseUrl: 'https://cold-crow-90.deno.dev/v1',
   systemMessage: undefined,
   max_tokens: undefined,
   temperature: undefined,
@@ -93,7 +93,7 @@ export const DefaultMessageTemplates = [
 
 export const DefaultConversationTemplates: any[] = []
 
-export const dataVersion = 3
+export const dataVersion = 4
 
 export const ApiUrls = [
   {
@@ -102,18 +102,8 @@ export const ApiUrls = [
     needVpn: true,
   },
   {
-    name: '免费线路 - justjavac 大佬搭建',
-    url: 'https://closeai.deno.dev/v1',
-    needVpn: false,
-  },
-  {
     name: '免费线路 - 来自群友盛先生',
     url: 'https://cold-crow-90.deno.dev/v1',
-    needVpn: false,
-  },
-  {
-    name: '免费线路 - 来自Moss作者',
-    url: 'https://xuxmei-openai-proxy.deno.dev/v1',
     needVpn: false,
   },
 ]
